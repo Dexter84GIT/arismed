@@ -1,0 +1,2 @@
+(()=>{"use strict";document.querySelectorAll(".accordeon").forEach(e=>{e.querySelectorAll(".item").forEach(e=>{e.addEventListener("click",t=>{e.classList.toggle("open")})})}),new Swiper(".goodsSlider",{spaceBetween:20,slidesPerView:4,loop:!0,navigation:{nextEl:".goods .swiper-button-next",prevEl:".goods .swiper-button-prev"}}),new Swiper(".newsSlider",{spaceBetween:30,slidesPerView:3,loop:!0,navigation:{nextEl:".mainNews .swiper-button-next",prevEl:".mainNews .swiper-button-prev"}})})();
+//# sourceMappingURL=main.js.map

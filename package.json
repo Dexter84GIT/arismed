@@ -1,0 +1,31 @@
+ {
+  "name": "arismed.ru",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sass": "NODE_ENV=production webpack --config webpack.config.js --mode=production",
+    "sass:dev": "webpack --config webpack.config.js --mode=development",
+    "sass:watch": "webpack --watch --config webpack.config.js",
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development",
+    "dev": "webpack --mode=development"
+  },
+  "author": "Dexter84",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "glob": "^11.0.3",
+    "lodash": "^4.17.21",
+    "mini-css-extract-plugin": "^2.9.4",
+    "postcss-loader": "^8.2.0",
+    "postcss-preset-env": "^10.4.0",
+    "sass": "^1.94.0",
+    "sass-loader": "^16.0.6",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}
