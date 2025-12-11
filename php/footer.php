@@ -59,7 +59,7 @@
         </footer>
    </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-    <script src="<?php bloginfo('template_directory'); ?>/main.js"></script>
+    <script src="<?php bloginfo('template_directory'); ?>/dist/main.js"></script>
 </body>
 
 </html>

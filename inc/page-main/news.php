@@ -88,6 +88,7 @@
                             </svg>
                         </div>
                     </div>
+                    <a href="/news" class="seeMore mobile">Все новости</a>
                 </div>
             </div>
         </section>

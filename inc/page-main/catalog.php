@@ -1,12 +1,12 @@
         <section class="mainCatalog section">
             <div class="patterns bg">
-                <div class="pattern_001">
+                <div class="pattern_001 desktop">
                     <img src="<?php bloginfo('template_directory'); ?>/img/plus_001.png" alt="plus">
                 </div>
-                <div class="pattern_002">
+                <div class="pattern_002 desktop">
                     <img src="<?php bloginfo('template_directory'); ?>/img/plus_002.png" alt="plus">
                 </div>
-                <div class="pattern_003">
+                <div class="pattern_003 desktop">
                     <img src="<?php bloginfo('template_directory'); ?>/img/plus_003.png" alt="plus">
                 </div>
                 <div class="pattern_004">
@@ -136,6 +136,7 @@
 
                         </div>
                     </a>
+                    <a href="/faq" class="seeMore mobile">Показать еще</a>
                 </div>
             </div>
         </section>

@@ -14,15 +14,19 @@ $white: #ffffff;
 $black: #2D3A4F;
 $lightBlack: #333333;
 $red: #F78866;
+$redHover: #D97B5E;
 $gray: #fafafa;
+$blue: #B4D5DF;
+$lightBlue: #EEF5F7;
+$darkBlue: #68B5C7;
 $tpr: rgba(255, 255, 255, 0.2);
 $br10: 10rem;
 $br2: 2rem;
-$shadow: 0px 12px 12px #00000001;
+$shadow: 0px 12px 12px #00000009;
 
 
 @mixin mobile {
-    @media (max-width: 576px) {
+    @media (max-width: 768px) {
         @content;
     }
 }
@@ -73,6 +77,12 @@ ol {
 
 .section {
     padding: 6rem 0rem;
+    position: relative;
+    z-index: 3;
+
+    @include mobile {
+        padding: 3rem 0;
+    }
 }
 
 .page {
@@ -98,9 +108,19 @@ ol {
 .sectionTitle {
     font-size: 2.7rem;
     font-weight: bold;
+
+    @include mobile {
+        font-size: 2.2rem;
+    }
 }
 
+.mobile {
+    display: none;
 
+    @include mobile {
+        display: flex;
+    }
+}
 
 /*UTILS*/
 .pr {
@@ -179,9 +199,33 @@ ol {
     gap: 6rem;
 }
 
+.desktop {
+    @include mobile {
+        display: none;
+    }
+}
+
+.mobile {
+    display: none;
+
+    @include mobile {
+        display: inherit;
+    }
+}
+
 /*MIXINS*/
 .btnPrimary {
     border-radius: 10rem;
+}
+
+.seeMore.mobile {
+    width: 100%;
+    font-size: 1.3rem;
+    font-family: 'Druk', sans-serif;
+    justify-content: center;
+    padding: 1.8rem;
+    border-radius: 10rem;
+    box-shadow: $shadow;
 }
 
 .redBtn {
@@ -210,6 +254,12 @@ ol {
         }
     }
 }
+
+span.currency {
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
 
 .iconLink {
     width: 4rem;
@@ -244,6 +294,84 @@ ol {
         position: absolute;
         right: -.5rem;
         top: -.5rem;
+        font-size: 1rem;
+    }
+}
+
+.mobileMenu {
+    padding: 2.4rem 2rem 2rem 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    background: #2d3a4fbd;
+    color: $white;
+    position: fixed;
+    left: 0rem;
+    top: 0rem;
+    z-index: 2000;
+    width: 100%;
+    backdrop-filter: blur(8px);
+    transform: translateY(-200%);
+    opacity: 0;
+    transition: .3s ease-in;
+
+    & .closeMenu {
+        width: 2.4rem;
+        height: 2.4rem;
+        cursor: pointer;
+
+        & span {
+            width: 1.5rem;
+            height: 2px;
+            background: $white;
+            display: flex;
+            transform: rotate(45deg);
+            position: relative;
+
+            &::after {
+                content: '';
+                width: 1.5rem;
+                height: 2px;
+                background: $white;
+                position: absolute;
+                left: 0rem;
+                top: 0rem;
+                transform: rotate(-90deg);
+            }
+        }
+    }
+
+    &.active {
+        display: flex;
+        transform: translateY(0%);
+        transition: .3s ease;
+        opacity: 1;
+
+        &+.header {
+            opacity: .5;
+            z-index: 1;
+        }
+
+    }
+
+    & .menu a {
+        font-size: 1.9rem;
+        font-weight: bold;
+        font-family: 'Druk', sans-serif;
+    }
+
+    & svg {
+        fill: $white;
+    }
+
+    & .phone {
+        & p {
+            font-size: 1.5rem;
+        }
+
+    }
+
+    & .policy {
+        font-size: 1.3rem;
     }
 }
 
@@ -285,6 +413,20 @@ main {
 .header {
     padding: 3rem 0;
     width: 100%;
+    background: $bg;
+    position: relative;
+
+    @include mobile {
+        padding: 1.4rem 0rem;
+
+    }
+
+    & .menu .link {
+        color: $white;
+        background: $tpr;
+        font-family: 'Druk', sans-serif;
+        font-weight: 500;
+    }
 
     &.mainHeader {
         background: transparent;
@@ -293,8 +435,25 @@ main {
         top: 0px;
         left: 0px;
 
-        & .iconLink svg {
-            fill: $white;
+        @include mobile {
+            position: fixed;
+            background: $black;
+        }
+
+        & .links .iconLink {
+            background: $tpr;
+
+            & svg {
+                fill: $white;
+            }
+        }
+
+        & .phone .iconLink {
+            background: $tpr;
+
+            & svg {
+                fill: $white;
+            }
         }
 
         & .menu .link {
@@ -310,9 +469,116 @@ main {
     }
 
     & .phone {
+        & .img {
+            background: $white;
+            transition: .3s ease;
+
+            & svg {
+                fill: $lightBlack;
+                transition: .3s ease;
+            }
+
+            &:hover {
+                background: $black;
+
+                & svg {
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+    & .links .iconLink {
+        background: $white;
+
+        & svg {
+            fill: $black;
+            transition: .3s ease;
+        }
+
+        &:hover {
+            background: $black;
+
+            & svg {
+                fill: $white;
+            }
+        }
+    }
+
+    & .openMenu {
+        width: 4rem;
+        height: 4rem;
+        cursor: pointer;
+        padding: 0.3rem 1rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+
+        & span {
+            width: 100%;
+            height: 1px;
+            background: $white;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                bottom: 0.5rem;
+                left: 0px;
+                width: 100%;
+                height: 1px;
+                background: $white;
+                content: '';
+            }
+
+            &::before {
+                position: absolute;
+                top: 0.5rem;
+                left: 0px;
+                width: 100%;
+                height: 1px;
+                background: $white;
+                content: '';
+            }
+        }
+    }
+
+    & .logo {
+        @include mobile {
+            max-width: 14rem;
+        }
+    }
+
+    & .phone {
         color: $black;
         font-size: 1.5rem;
         font-weight: 700;
+
+        @include mobile {
+            display: none;
+        }
+    }
+
+    & .top {
+        z-index: 40;
+        position: relative;
+
+        @include mobile {
+            gap: 1.5rem;
+            justify-content: flex-start;
+        }
+
+        & .info {
+            margin-left: auto;
+        }
+    }
+
+    & .bottom {
+        z-index: 40;
+
+        @include mobile {
+            display: none;
+        }
     }
 
     & .menu {
@@ -331,6 +597,27 @@ main {
             }
         }
     }
+
+    & .bottom {
+        @include mobile {
+            display: none;
+        }
+    }
+
+    & .breadcrumbs {
+        position: relative;
+        z-index: 40;
+        font-size: 1.3rem;
+
+        & a {
+            transition: .3s ease;
+
+            &:hover {
+                color: $red
+            }
+        }
+    }
+
 }
 
 .hero {
@@ -338,7 +625,8 @@ main {
     position: relative;
     overflow: hidden;
     color: $white;
-    padding: 3rem 0rem;
+    padding-top: 3rem;
+    z-index: 10;
 
     & .container {
         position: relative;
@@ -347,6 +635,13 @@ main {
         z-index: 2;
         background: url(../img/hero_bg_medkit.png) no-repeat right bottom;
         background-size: 70%;
+
+        @include mobile {
+            flex-direction: column;
+            padding-top: 9rem;
+            padding-bottom: 0rem;
+            background-position: left bottom;
+        }
     }
 
     & .overlay {
@@ -357,6 +652,14 @@ main {
         right: 0px;
         z-index: 1;
         transform: translateY(-5%);
+
+        @include mobile {
+            top: inherit;
+            bottom: 0rem;
+            max-width: 33rem;
+            left: auto;
+            right: auto;
+        }
     }
 
     & .mainTitle {
@@ -364,18 +667,44 @@ main {
         line-height: 5.2rem;
         font-weight: bold;
         max-width: 60%;
+
+        @include mobile {
+            font-size: 2.4rem;
+            line-height: 2.8rem;
+            max-width: 100%;
+            order: 1;
+        }
     }
 
     & .img {
         position: absolute;
         bottom: 0px;
         right: 0px;
+
+        @include mobile {
+            position: relative;
+            max-width: 20rem;
+            margin-left: auto;
+            margin-top: 5rem;
+        }
+    }
+
+    & .partners {
+        @include mobile {
+            order: 2;
+            max-width: 20rem;
+        }
     }
 
     & .subtitle {
         font-size: 1.8rem;
         max-width: 40%;
         font-weight: 400;
+
+        @include mobile {
+            order: 3;
+            max-width: 100%;
+        }
     }
 
     & .primaryBtn {
@@ -385,12 +714,29 @@ main {
         font-weight: bold;
         background: $red;
         width: fit-content;
+
+        @include mobile {
+            order: 4;
+            width: 100%;
+            justify-content: center;
+        }
     }
 }
 
 .supremacy {
     padding: 6rem 0;
     background: $main;
+
+    @include mobile {
+        padding: 3rem 0;
+    }
+
+    & .container {
+        @include mobile {
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
 
     & .block {
         padding: 2rem 1.5rem 2rem 2rem;
@@ -400,6 +746,10 @@ main {
         flex: 1;
         border-radius: $br2;
         box-shadow: $shadow;
+
+        @include mobile {
+            max-width: 100%;
+        }
 
         & .icon {
             background: $main;
@@ -430,9 +780,13 @@ main {
     }
 }
 
-.mainCatalog {
+.catalog {
     position: relative;
     overflow: hidden;
+
+    &.pageCatalog {
+        background: $gray;
+    }
 
     & .patterns {
         position: absolute;
@@ -450,6 +804,7 @@ main {
             height: 20rem;
             transform: rotate(-10deg);
             backdrop-filter: blur(10px);
+
         }
 
         & .pattern_002 {
@@ -496,6 +851,14 @@ main {
         background: $white;
         box-shadow: $shadow;
 
+        @include mobile {
+            max-width: 100%;
+
+            &:nth-child(n+4) {
+                display: none;
+            }
+        }
+
         & .title {
             font-size: 1.5rem;
             font-weight: 500;
@@ -505,6 +868,18 @@ main {
             margin-top: auto;
             margin-left: auto;
         }
+
+        & .img {
+            @include mobile {
+                max-width: 70%;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    & .seeMore {
+        background: $white;
     }
 }
 
@@ -519,12 +894,21 @@ main {
 
     & .swiper-wrapper {
         align-items: stretch;
+
+        @include mobile {
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
     }
 
     & .link {
         color: $red;
         font-size: 1.5rem;
         font-weight: 500;
+
+        @include mobile {
+            display: none;
+        }
     }
 
     & .slider {
@@ -539,6 +923,14 @@ main {
             width: 100%;
             box-shadow: $shadow;
             height: auto;
+
+            @include mobile {
+                max-width: 100%;
+
+                &:nth-child(n+4) {
+                    display: none;
+                }
+            }
 
             & .title {
                 font-size: 1.5rem;
@@ -566,7 +958,26 @@ main {
                     color: $white;
                 }
             }
+
+            & .img {
+                @include mobile {
+                    max-width: 70%;
+                    width: 100%;
+                    margin: 0 auto;
+                }
+            }
+
         }
+
+        & .controlBtn {
+            @include mobile {
+                display: none;
+            }
+        }
+    }
+
+    & .seeMore {
+        background: $bg;
     }
 }
 
@@ -581,6 +992,10 @@ main {
         left: 0px;
         top: 0px;
         z-index: 1;
+
+        @include mobile {
+            display: none;
+        }
 
         & .pattern_001 {
             position: absolute;
@@ -614,12 +1029,23 @@ main {
         & .link {
             color: $red;
             font-size: 15px;
+
+            @include mobile {
+                display: none;
+            }
         }
     }
 
     & .slider {
         position: inherit;
         width: 100%;
+
+        @include mobile {
+            & .swiper-wrapper {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
 
         & .slide {
             max-width: 38rem;
@@ -628,6 +1054,14 @@ main {
             background: $white;
             border-radius: 1rem;
             box-shadow: $shadow;
+
+            @include mobile {
+                max-width: 100%;
+
+                &:nth-child(n+4) {
+                    display: none;
+                }
+            }
 
             & .img {
                 max-height: 18rem;
@@ -639,13 +1073,29 @@ main {
             }
         }
     }
+
+    & .controlBtn {
+        @include mobile {
+            display: none;
+        }
+    }
+
+    & .seeMore {
+        background: $white;
+    }
 }
 
 .mainFaq {
+    background: $gray;
+
     & .top {
         & .link {
             font-size: 1.5rem;
             color: $red;
+
+            @include mobile {
+                display: none;
+            }
         }
     }
 
@@ -673,6 +1123,10 @@ main {
             & .question {
                 font-size: 1.5rem;
                 max-width: 95%;
+
+                @include mobile {
+                    max-width: 85%;
+                }
             }
 
             & .answer {
@@ -699,6 +1153,11 @@ main {
             }
         }
     }
+
+    & .seeMore {
+        background: $bg;
+    }
+
 }
 
 .mainReviews {
@@ -828,6 +1287,10 @@ main {
     padding: 9rem 0rem;
     background: $white;
 
+    @include mobile {
+        padding: 3rem 0;
+    }
+
     & p,
     & li {
         font-size: 1.5rem;
@@ -846,14 +1309,46 @@ main {
 .footer {
     background: url(../img/bg.png) no-repeat center /cover;
     color: $white;
+    position: relative;
+    z-index: 10;
 
     & .container {
         padding-top: 6rem;
         padding-bottom: 3rem;
         background: url(../img/hero_bg_img.png) no-repeat center right /contain;
+
+        @include mobile {
+            padding-top: 3rem;
+            gap: 3rem;
+            background: none;
+        }
+    }
+
+    & .top {
+        @include mobile {
+            flex-direction: column;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+    }
+
+    & .block {
+        @include mobile {
+            &:last-child {
+                flex-direction: column-reverse;
+                gap: 3rem;
+                align-items: flex-start;
+            }
+        }
     }
 
     & .links {
+        @include mobile {
+            flex-direction: column;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
         & .phone {
             font-size: 1.5rem;
             font-weight: bold;
@@ -867,6 +1362,7 @@ main {
             background: #ffffff3c;
             backdrop-filter: blur(4px);
             transition: .3s ease;
+
             &:hover {
                 background: $red;
             }
@@ -878,6 +1374,10 @@ main {
     }
 
     & .menu {
+        @include mobile {
+            display: none;
+        }
+
         & .link {
             padding: 1.35rem 2.2rem;
             background: #ffffff15;
@@ -894,10 +1394,594 @@ main {
 
     & .disclaimer {
         font-size: 1.5rem;
+
+        @include mobile {
+            font-weight: bold;
+        }
     }
 
     & .copyright,
     & .policy {
         font-size: 1.3rem;
+    }
+}
+
+.page {
+    background: $gray;
+
+    & main {
+        position: relative;
+    }
+
+    & h1 {
+        font-size: 2.7rem;
+        font-weight: bold;
+    }
+
+    & .topPatterns {
+        position: absolute;
+        top: 0rem;
+        left: 0rem;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+
+        & .pattern_001 {
+            position: absolute;
+            width: 20rem;
+            top: 14rem;
+            left: 3%;
+            z-index: 30;
+        }
+
+        & .pattern_002 {
+            position: absolute;
+            top: -2%;
+            right: 2%;
+            width: 37rem;
+            z-index: 30;
+        }
+    }
+
+    & p {
+        font-size: 1.5rem;
+    }
+
+    & h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    & ul {
+        padding-left: 2rem;
+        list-style-type: circle;
+
+        & li {
+            font-size: 1.5rem;
+
+        }
+    }
+
+    & .searchBar {
+        position: relative;
+
+        & .searchInput {
+            width: 100%;
+            border: 1px solid $blue;
+            border-radius: 1rem;
+            padding: 1.6rem 8rem;
+            position: relative;
+
+        }
+
+        & p.legend {
+            font-size: 1.1rem;
+            color: $black;
+            opacity: .5;
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        & input {
+            font-size: 1.5rem;
+            border: none;
+            background: transparent;
+        }
+
+        & .btn {
+            position: absolute;
+            right: 0%;
+            padding: 1.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & svg {
+                fill: $lightBlack;
+                transition: .3s ease;
+            }
+
+            &:hover svg {
+                fill: $red;
+            }
+        }
+    }
+
+    & .quantity {
+        background: $lightBlue;
+        padding: 1.8rem 2rem;
+        border-radius: 10rem;
+
+        & .btn {
+            cursor: pointer;
+
+            & svg {
+                fill: $lightBlack;
+                transition: .3s ease;
+            }
+
+            &:hover {
+                & svg {
+                    fill: $red;
+                }
+            }
+        }
+    }
+
+}
+
+section.about {
+    overflow: hidden;
+
+    & .top {
+        position: relative;
+
+        & .patterns {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+
+            & .pattern_001 {
+                position: absolute;
+                width: 20rem;
+                left: -3rem;
+                top: -3rem;
+                transform: rotate(40deg);
+            }
+
+            & .pattern_002 {
+                width: 37rem;
+                position: absolute;
+                right: -15rem;
+                bottom: -10%;
+            }
+        }
+
+        & .text {
+            max-width: calc(60% - 2.5rem);
+            padding-top: 3rem;
+        }
+
+        & .img {
+            max-width: calc(40% - 2.5rem);
+            position: relative;
+        }
+    }
+
+    & .list {
+        margin-top: 1rem;
+    }
+}
+
+section.card {
+    & .column {
+        max-width: calc(50% - 1.5rem);
+        width: 100%;
+        overflow: hidden;
+
+        & ul li {
+            font-size: 1.3rem;
+        }
+    }
+
+    & .main {
+        width: 100%;
+
+        & .slide {
+            padding: 4rem;
+            border-radius: 1rem;
+            background: $white;
+            max-width: 60rem;
+        }
+    }
+
+    & .thumbs {
+        width: 100%;
+
+        & .slide {
+            max-width: 12rem;
+            border-radius: 1rem;
+            padding: 2rem;
+            background: $white;
+            cursor: pointer;
+        }
+    }
+
+    & .controls {
+        & .price {
+            & .value {
+                color: $red;
+                font-size: 2.7rem;
+                font-weight: bold;
+
+                & span {
+                    font-weight: 400;
+                    font-family: 'Montserrat';
+                }
+            }
+        }
+
+
+
+        & .addToCart {
+            background: $red;
+            color: $white;
+            padding: 1.8rem 2.4rem;
+            border-radius: 10rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: .3s ease;
+
+            &:hover {
+                background: $redHover;
+            }
+
+            & svg {
+                fill: $white;
+            }
+        }
+    }
+}
+
+section.docs {
+    & .results {
+        .row {
+            background: $white;
+            box-shadow: $shadow;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+    }
+}
+
+section.info {
+    .unit {
+        max-width: calc(33% - 2rem);
+        width: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: $shadow;
+        transition: .3s ease;
+
+        & .row {
+            padding: 2rem;
+            font-size: 1.5rem;
+
+            & .title {
+
+                font-weight: 500;
+                transition: .3s ease;
+            }
+        }
+
+        &:hover {
+            & .row {
+                & .title {
+                    color: $red;
+                }
+            }
+        }
+
+        & .img {
+            height: 18rem;
+            width: 100%;
+            background: $lightBlue;
+        }
+
+
+
+
+    }
+}
+
+section.news {
+    padding-bottom: 0rem;
+
+    & .column {
+        max-width: 25%;
+        width: 100%;
+        line-height: 2rem;
+
+        & svg {
+            fill: $red;
+        }
+
+        & a {
+            font-size: 1.5rem;
+            transition: .3s ease;
+
+            &:hover {
+                color: $red;
+            }
+        }
+
+        &:last-child .block {
+            gap: 3px;
+        }
+
+        &:last-child p {
+            font-size: 1.3rem;
+        }
+
+        & .bottom {
+            margin-left: 3.3rem;
+        }
+
+    }
+
+    & .download {
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        background: $white;
+    }
+}
+
+.cart {
+    & .controls {
+        margin-left: auto;
+        margin-top: 3rem;
+
+        & .overall {
+            margin-left: auto;
+        }
+
+        & .toCheckout {
+            padding: 1.8rem 2.4rem;
+            border-radius: 10rem;
+            font-size: 1.3rem;
+            color: $white;
+            background: $red;
+            transition: .3s ease;
+            width: fit-content;
+
+            & svg {
+                fill: $white;
+            }
+
+            &:hover {
+                background: $redHover;
+            }
+        }
+
+
+
+
+    }
+
+    & .unit {
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        background: $white;
+
+        & .img {
+            max-width: 9rem;
+        }
+
+        & .name {
+            max-width: 50rem;
+        }
+
+        & .old {
+            color: #3333337b;
+            text-decoration: line-through;
+        }
+
+        & .quantity {
+            margin-left: auto;
+        }
+
+        & .cancel {
+            width: 5.4rem;
+            height: 5.4rem;
+            border-radius: 50%;
+            background: $bg;
+            cursor: pointer;
+
+            & svg {
+                fill: $black;
+                transition: .3s ease;
+            }
+
+            &:hover {
+                & svg {
+                    fill: $red;
+                }
+            }
+        }
+    }
+}
+.checkout, .account {
+    & .checkoutForm {
+        & h3 {
+            font-size: 1.5rem;
+        }
+        & .row {
+            width: 100%;
+            & label {
+                padding: 3rem;
+                border-radius: 1rem;
+                width: 100%;
+                box-shadow: $shadow;
+                background: $white;
+                position: relative;
+                & p {
+                    font-size: 1.5rem;
+                }
+                & span {
+                    font-size: 1.5rem;
+                }
+                & .fieldRadio {
+                    position: absolute;
+                    left: -9999px;
+                    opacity: 0;
+                }
+                &::before {
+                    content: '';
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 50%;
+                    border: 2px solid $black;
+                }
+                &:has(input[type="radio"]:checked)::after {
+                    content: '';
+                    position: absolute;
+                    top: 3.5rem;
+                    left: 3.5rem;
+                    width: 1rem;
+                    height: 1rem;
+                    border-radius: 50%;
+                    background: $black;
+                }
+            }
+        }
+        & .field {
+            position: relative;
+            flex: 1;
+            & input, & textarea {
+                width: 100%;
+                padding: 1.4rem 2rem;
+                border-radius: 1rem;
+                border: 1px solid $blue;
+                font-size: 1.5rem;
+                resize: none;
+                &::placeholder {
+                    font-size: 1.1rem;
+                    color: #33333377;
+                }
+                &:focus {
+                    border-color: $lightBlack;
+                }
+                &.error {
+                    border-color: $red;
+                }
+            }
+            
+        }
+        & .passwordField {
+            position: relative;
+            & svg {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 1.5rem;
+                cursor: pointer;
+            }
+        }
+        & .submit {
+            font-size: 1.3rem;
+            margin-left: auto;
+            padding: 1.8rem 2.4rem;
+            border-radius: 10rem;
+            color: $white;
+            background: $red;
+            transition: .3s ease;
+            & svg {
+                fill: $white;
+            }
+            &:hover {
+                background: $redHover;
+            }
+
+        }
+        & input[type="checkbox"] {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+        & .agree label {
+            position: relative;
+            user-select: none;
+            &::before {
+                content: '';
+                width: 1.4rem;
+                height: 1.4rem;
+                border: 2px solid $darkBlue;
+                border-radius: 2px;
+            }
+            &:has(input[type='checkbox']:checked)::after {
+                position: absolute;
+                left: 0.5rem;
+                top: 0.5rem;
+                content: '';
+                width: 5px;
+                height: 8px;
+                border-bottom: 2px solid $darkBlue;
+                border-right: 2px solid $darkBlue;
+                transform: rotate(40deg);
+            }
+            & a {
+                text-decoration: underline;
+                color: $darkBlue;
+            }
+        }
+    }
+    & .controls {
+        & .btn {
+            background: $bg;
+            padding: 1rem 1.5rem;
+            border-radius: 10rem;
+            cursor: pointer;
+            color: $black;
+            transition: .3s ease;
+            font-size: 1.3rem;
+            & svg {
+                fill: $black;
+            }
+            &.logout {
+                margin-left: auto;
+            }
+            &.active {
+                background: $black;
+                color: $white;
+                & svg {
+                    fill: $white;
+                }
+            }
+            &:hover {
+                background: $black;
+                color: $white;
+                & svg {
+                    fill: $white;
+                }
+            }
+        }
+    }
+    & .tabContent {
+        position: relative;
+        display: none;
+        &.active {
+            display: flex;
+        }
     }
 }

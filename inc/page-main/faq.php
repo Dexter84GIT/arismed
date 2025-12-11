@@ -86,5 +86,6 @@
                         </div>
                     </div>
                 </div>
+                <a href="/faq" class="seeMore mobile">Все вопросы</a>
             </div>
         </section>

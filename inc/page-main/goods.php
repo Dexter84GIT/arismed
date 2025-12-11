@@ -125,6 +125,7 @@
                                 <path d="M8 0L9.41 1.41L3.83 7H16V9H3.83L9.41 14.59L8 16L0 8L8 0Z" />
                             </svg>
                         </div>
+                        <a href="/goods" class="seeMore mobile">Все товары</a>
                     </div>
                 </div>
             </div>
