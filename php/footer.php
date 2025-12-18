@@ -1,4 +1,4 @@
-           <footer class="footer">
+        <footer class="footer">
             <div class="container df fdc gap60">
                 <div class="block top df aic jcsb">
                     <a href="/" class="logo">
@@ -17,7 +17,7 @@
                             <p class="druk">8 (963) 900-42-08</p>
                         </a>
                         <div class="social df aic gap20">
-                            <a href="#" class="link df aic jcc">
+                            <a href="https://t.me/aris_med" class="link df aic jcc" target="_blank">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -31,7 +31,7 @@
                                         d="M9.0084 17.5114C7.27747 17.5114 6.47308 17.2587 5.07486 16.248C4.19044 17.3851 1.3898 18.2737 1.26766 16.7534C1.26766 15.612 1.01497 14.6476 0.728589 13.5947C0.387458 12.2976 0 10.853 0 8.75992C0 3.76087 4.102 0 8.96208 0C13.8264 0 17.6378 3.94618 17.6378 8.80625C17.6541 13.5912 13.7933 17.4859 9.0084 17.5114ZM9.08 4.321C6.71313 4.19887 4.8685 5.83714 4.45998 8.40616C4.12306 10.533 4.72109 13.123 5.23068 13.2578C5.47495 13.3168 6.08983 12.8198 6.47308 12.4366C7.10679 12.8744 7.84475 13.1373 8.61252 13.1988C11.065 13.3168 13.1605 11.4497 13.3252 8.99998C13.4211 6.54503 11.5328 4.4657 9.08 4.32521L9.08 4.321Z" />
                                 </svg>
                             </a>
-                            <a href="#" class="link df aic jcc">
+                            <a href="https://vk.com/aris_med" class="link df aic jcc" target="_blank">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"

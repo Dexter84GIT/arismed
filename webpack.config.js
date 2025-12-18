@@ -33,7 +33,7 @@ export default {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'bundle.css'
+      filename: 'style.css'
     })
   ],
   devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',

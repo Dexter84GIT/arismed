@@ -1,3 +1,10 @@
+/*
+ Theme Name:   ArisMED
+ Author:       Dexter84
+ Author URI:   https://studiowhynot.ru
+ Template:     storefront
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 *,
@@ -87,6 +94,7 @@ ol {
 
 .page {
     min-height: 100vh;
+    position: relative;
 }
 
 .container {
@@ -295,6 +303,10 @@ span.currency {
         right: -.5rem;
         top: -.5rem;
         font-size: 1rem;
+        min-width: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -372,6 +384,47 @@ span.currency {
 
     & .policy {
         font-size: 1.3rem;
+    }
+}
+
+.statusBadge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 10rem;
+    font-size: 1.1rem;
+    line-height: normal;
+    color: $white;
+    cursor: pointer;
+
+    &.pending {
+        background: #2D3A4F;
+    }
+
+    &.complete {
+        background: #B1B1B1;
+    }
+
+    &.canceled {
+        background: #F27D7D;
+    }
+
+    &.hasPayment {
+        background: #4ECEBB;
+    }
+
+    &.hasntPayment {
+        background: #C88E8E;
+    }
+
+    &.reset {
+        background: #EEF5F7;
+        width: 2.3rem;
+        height: 2.3rem;
+        padding: 0;
+        margin-left: 2rem;
+
+        & svg {
+            fill: $black;
+        }
     }
 }
 
@@ -465,6 +518,11 @@ main {
 
         & .phone {
             color: $white;
+
+            & p {
+                font-size: 3.2rem;
+                font-weight: 800;
+            }
         }
     }
 
@@ -490,13 +548,16 @@ main {
 
     & .links .iconLink {
         background: $white;
+        position: relative;
+        transition: .3s ease;
 
         & svg {
             fill: $black;
             transition: .3s ease;
         }
 
-        &:hover {
+        &:hover,
+        &.active {
             background: $black;
 
             & svg {
@@ -560,7 +621,7 @@ main {
     }
 
     & .top {
-        z-index: 40;
+        z-index: 45;
         position: relative;
 
         @include mobile {
@@ -618,6 +679,141 @@ main {
         }
     }
 
+    & .drop {
+        display: none;
+        box-shadow: $shadow;
+        z-index: 500;
+        position: absolute;
+        top: 6rem;
+        right: 0rem;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    & .miniCart {
+        background: $white;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 42rem;
+        width: 100%;
+        max-height: 70vh;
+        overflow: auto;
+
+        & .item {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: #EFF5F7;
+
+            & .img {
+                width: 7rem;
+                height: 7rem;
+                max-width: 7rem;
+                object-fit: cover;
+                flex: 1;
+                background: $white;
+                border-radius: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+
+            & .text {
+                flex: 3;
+
+                & .name {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        & .overall {
+            margin-left: auto;
+
+            & .sum {
+                font-size: 2.7rem;
+            }
+        }
+
+        & .toCheckout {
+            width: 100%;
+            background: $red;
+            border-radius: 10rem;
+            padding: 1.8rem;
+            color: $white;
+            font-size: 1.3rem;
+            transition: .3s ease;
+
+            &:hover {
+                background: $redHover;
+            }
+        }
+
+        & .delete {
+            width: 1.1rem;
+            height: 1px;
+            background: $black;
+            transform: rotate(45deg);
+            position: relative;
+
+            &::after {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 1.1rem;
+                height: 1px;
+                background: $black;
+                transform: rotate(-135deg);
+            }
+        }
+    }
+
+    & .miniAccount {
+        display: none;
+        background: $white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        transition: .3s ease;
+        max-width: 34rem;
+        width: 100%;
+
+        & h3 {
+            font-size: 1.1rem;
+        }
+
+        & .link {
+            padding: 0.5rem 1rem;
+            transition: .3s ease;
+            box-shadow: 0px 1px 0px #2d3a4f12;
+
+            & p {
+                font-size: 1.3rem;
+            }
+
+            & svg {
+                fill: $black;
+                transition: .3s ease;
+            }
+
+            &.logout {
+                font-size: 1.1rem;
+                margin-top: 5rem;
+            }
+
+            &:hover {
+                background: $red;
+                color: $white;
+
+                & svg {
+                    fill: $white;
+                }
+            }
+        }
+    }
+
 }
 
 .hero {
@@ -645,13 +841,29 @@ main {
     }
 
     & .overlay {
-        max-width: 76rem;
+
         width: 100%;
+        height: 100%;
         position: absolute;
         top: 0px;
         right: 0px;
         z-index: 1;
-        transform: translateY(-5%);
+
+
+        & .block {
+            max-width: 120rem;
+            margin: 0 auto;
+            width: 100%;
+            justify-content: flex-end;
+
+            & .img {
+                max-width: 76rem;
+                transform: translateY(-5%);
+                margin-left: auto;
+            }
+        }
+
+
 
         @include mobile {
             top: inherit;
@@ -714,6 +926,11 @@ main {
         font-weight: bold;
         background: $red;
         width: fit-content;
+        transition: .3s ease;
+
+        &:hover {
+            background: $redHover;
+        }
 
         @include mobile {
             order: 4;
@@ -887,7 +1104,7 @@ main {
     background: $main;
 
     & .wrap {
-        max-width: 130rem;
+        max-width: 136rem;
         width: 100%;
         margin: 0 auto;
     }
@@ -932,6 +1149,21 @@ main {
                 }
             }
 
+            & .img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                overflow: hidden;
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    object-fit: contain;
+                    object-position: center;
+                }
+            }
+
             & .title {
                 font-size: 1.5rem;
                 font-weight: 500;
@@ -942,6 +1174,11 @@ main {
                 font-size: 2rem;
                 font-weight: 500;
                 color: $red;
+
+                & .woocommerce-Price-currencySymbol {
+                    font-family: 'Montserrat';
+                    font-weight: 400;
+                }
             }
 
             & .btn {
@@ -1018,7 +1255,7 @@ main {
     }
 
     & .wrap {
-        max-width: 130rem;
+        max-width: 136rem;
         width: 100%;
         margin: 0 auto;
         position: relative;
@@ -1469,25 +1706,20 @@ main {
             width: 100%;
             border: 1px solid $blue;
             border-radius: 1rem;
-            padding: 1.6rem 8rem;
+            padding: 1.6rem 2.4rem;
             position: relative;
 
-        }
-
-        & p.legend {
-            font-size: 1.1rem;
-            color: $black;
-            opacity: .5;
-            position: absolute;
-            left: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
         }
 
         & input {
             font-size: 1.5rem;
             border: none;
             background: transparent;
+
+            &::placeholder {
+                font-size: 1.1rem;
+                color: #33333379;
+            }
         }
 
         & .btn {
@@ -1603,6 +1835,14 @@ section.card {
         }
     }
 
+    & .list {
+        font-size: 1.3rem;
+
+        & p {
+            font-size: 1.3rem;
+        }
+    }
+
     & .thumbs {
         width: 100%;
 
@@ -1613,6 +1853,14 @@ section.card {
             background: $white;
             cursor: pointer;
         }
+    }
+
+
+    & .noimg {
+        width: 100%;
+        height: 100%;
+        background: $blue;
+        border-radius: 2rem;
     }
 
     & .controls {
@@ -1650,6 +1898,19 @@ section.card {
             }
         }
     }
+
+    & .description p {
+        font-size: 1.5rem;
+    }
+
+    & .download {
+        width: 100%;
+        padding: 2rem;
+        border-radius: 1rem;
+        background: $white;
+        box-shadow: $shadow;
+
+    }
 }
 
 section.docs {
@@ -1660,6 +1921,11 @@ section.docs {
             padding: 2rem;
             border-radius: 1rem;
         }
+    }
+
+    & .head p {
+        color: #33333377;
+        font-size: 1.1rem;
     }
 }
 
@@ -1753,14 +2019,24 @@ section.news {
 
         & .overall {
             margin-left: auto;
+
+            & .amount {
+                font-size: 3.2rem;
+                font-weight: 800;
+
+                & .woocommerce-Price-currencySymbol {
+                    font-weight: normal;
+                }
+            }
         }
 
         & .toCheckout {
             padding: 1.8rem 2.4rem;
             border-radius: 10rem;
-            font-size: 1.3rem;
+            font-size: 1.8rem;
             color: $white;
             background: $red;
+            font-weight: 700;
             transition: .3s ease;
             width: fit-content;
 
@@ -1772,10 +2048,6 @@ section.news {
                 background: $redHover;
             }
         }
-
-
-
-
     }
 
     & .unit {
@@ -1785,20 +2057,44 @@ section.news {
         background: $white;
 
         & .img {
-            max-width: 9rem;
+            width: 10rem;
+            height: 10rem;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+
+            & img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: contain;
+                object-position: center;
+            }
         }
 
         & .name {
             max-width: 50rem;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
 
         & .old {
             color: #3333337b;
             text-decoration: line-through;
+            font-size: 1.8rem;
+            font-weight: 400;
         }
 
+        & .new {
+            color: $black;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        & .woocommerce-Price-currencySymbol {
+            font-weight: 400;
+        }
         & .quantity {
             margin-left: auto;
+            font-size: 2.4rem;
         }
 
         & .cancel {
@@ -1807,6 +2103,7 @@ section.news {
             border-radius: 50%;
             background: $bg;
             cursor: pointer;
+            font-size: 2.4rem;
 
             & svg {
                 fill: $black;
@@ -1821,13 +2118,27 @@ section.news {
         }
     }
 }
-.checkout, .account {
+
+
+
+.checkout,
+.account {
+    & .disclaimer {
+        font-size: 1.5rem;
+    }
+
     & .checkoutForm {
         & h3 {
             font-size: 1.5rem;
         }
+
+        & .label {
+            font-size: 1.5rem;
+        }
+
         & .row {
             width: 100%;
+
             & label {
                 padding: 3rem;
                 border-radius: 1rem;
@@ -1835,17 +2146,21 @@ section.news {
                 box-shadow: $shadow;
                 background: $white;
                 position: relative;
+
                 & p {
                     font-size: 1.5rem;
                 }
+
                 & span {
                     font-size: 1.5rem;
                 }
+
                 & .fieldRadio {
                     position: absolute;
                     left: -9999px;
                     opacity: 0;
                 }
+
                 &::before {
                     content: '';
                     width: 2rem;
@@ -1853,6 +2168,7 @@ section.news {
                     border-radius: 50%;
                     border: 2px solid $black;
                 }
+
                 &:has(input[type="radio"]:checked)::after {
                     content: '';
                     position: absolute;
@@ -1865,31 +2181,40 @@ section.news {
                 }
             }
         }
+
         & .field {
             position: relative;
             flex: 1;
-            & input, & textarea {
+
+            & input,
+            & textarea {
                 width: 100%;
                 padding: 1.4rem 2rem;
                 border-radius: 1rem;
-                border: 1px solid $blue;
+                border: 1px solid #CEE5EB;
                 font-size: 1.5rem;
                 resize: none;
+                outline: none;
+
                 &::placeholder {
                     font-size: 1.1rem;
                     color: #33333377;
                 }
+
                 &:focus {
-                    border-color: $lightBlack;
+                    border-color: #68B5C7;
                 }
+
                 &.error {
                     border-color: $red;
                 }
             }
-            
+
         }
+
         & .passwordField {
             position: relative;
+
             & svg {
                 position: absolute;
                 top: 50%;
@@ -1898,6 +2223,7 @@ section.news {
                 cursor: pointer;
             }
         }
+
         & .submit {
             font-size: 1.3rem;
             margin-left: auto;
@@ -1906,22 +2232,28 @@ section.news {
             color: $white;
             background: $red;
             transition: .3s ease;
+
             & svg {
                 fill: $white;
             }
+
             &:hover {
                 background: $redHover;
             }
 
         }
+
         & input[type="checkbox"] {
             position: absolute;
             left: -9999px;
             opacity: 0;
         }
+
         & .agree label {
             position: relative;
             user-select: none;
+            font-size: 1.5rem;
+
             &::before {
                 content: '';
                 width: 1.4rem;
@@ -1929,6 +2261,7 @@ section.news {
                 border: 2px solid $darkBlue;
                 border-radius: 2px;
             }
+
             &:has(input[type='checkbox']:checked)::after {
                 position: absolute;
                 left: 0.5rem;
@@ -1940,12 +2273,15 @@ section.news {
                 border-right: 2px solid $darkBlue;
                 transform: rotate(40deg);
             }
+
             & a {
                 text-decoration: underline;
                 color: $darkBlue;
+                font-size: 1.5rem;
             }
         }
     }
+
     & .controls {
         & .btn {
             background: $bg;
@@ -1955,33 +2291,200 @@ section.news {
             color: $black;
             transition: .3s ease;
             font-size: 1.3rem;
+
             & svg {
                 fill: $black;
             }
+
             &.logout {
                 margin-left: auto;
             }
+
             &.active {
                 background: $black;
                 color: $white;
+
                 & svg {
                     fill: $white;
                 }
             }
+
             &:hover {
                 background: $black;
                 color: $white;
+
                 & svg {
                     fill: $white;
                 }
             }
         }
     }
+
     & .tabContent {
         position: relative;
         display: none;
+
         &.active {
             display: flex;
+        }
+    }
+
+    & .tabContent {
+        & .accordeon {
+            & .item {
+                padding: 2rem;
+                background: $white;
+                box-shadow: $shadow;
+                border-radius: 1rem;
+                transition: .3s ease;
+                overflow: hidden;
+                cursor: pointer;
+
+                & .top {
+                    & .date {
+                        color: $lightBlack;
+                    }
+
+                    & svg {
+                        transform: rotate(90deg);
+                        fill: $black;
+                        margin-left: auto;
+                        transition: .3s ease;
+                    }
+
+                    & .count {
+                        font-size: 1.3rem;
+                        color: #33333377;
+                    }
+                }
+
+                & .list {
+                    padding-left: 1rem;
+
+                    & li {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        font-size: 1.3rem;
+                        color: $lightBlack;
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            width: 2px;
+                            height: 2px;
+                            background: $black;
+                            position: absolute;
+                            left: -1rem;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+
+                        & p {
+                            font-size: 1.3rem;
+                        }
+
+                        & span {
+                            font-size: 1.3rem;
+                            position: relative;
+
+                            &::before {
+                                content: '';
+                                width: 2px;
+                                height: 2px;
+                                background: $black;
+                                position: absolute;
+                                left: -1rem;
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+                        }
+                    }
+
+                }
+
+                & .bottom {
+                    height: 0rem;
+                    opacity: 0;
+                    transition: .3s ease;
+
+                    & .unit {
+                        max-width: calc(50% - 1rem);
+                        width: 100%;
+                        padding: 2rem;
+                        border: 1px solid #EEF4F6;
+                        border-radius: 1rem;
+                    }
+                }
+
+
+            }
+
+            & .open {
+                gap: 2rem;
+
+                & .top {
+                    & svg {
+                        transform: rotate(-90deg);
+                        fill: $red;
+                    }
+                }
+
+                & .bottom {
+                    height: auto;
+                    opacity: 1;
+                }
+            }
+        }
+
+        & .accountBtn {
+            background: $red;
+            color: $white;
+            padding: 1.8rem 2.4rem;
+            font-size: 1.3rem;
+            border-radius: 10rem;
+            cursor: pointer;
+            transition: .3s ease;
+            width: fit-content;
+            margin-left: auto;
+
+            &:hover {
+                background: $redHover;
+            }
+
+            & .img {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+        }
+
+        &#adress {
+            & .row {
+                width: 100%;
+                padding: 2rem;
+                border-radius: 1rem;
+                box-shadow: $shadow;
+                background: $white;
+            }
+
+            & .edit {
+                cursor: pointer;
+
+                & svg {
+                    fill: $black;
+                    transition: .3s ease;
+                }
+
+                &:hover {
+                    & svg {
+                        fill: $red;
+                    }
+                }
+            }
+
+            & .accountBtn {
+                margin-top: 4rem;
+            }
         }
     }
 }

@@ -1,6 +1,10 @@
-        <section class="hero section">
+        <section class="hero">
             <div class="overlay">
-                <img src="<?php bloginfo('template_directory'); ?>/img/hero_bg_img.png" alt="bg">
+                <div class="block df">
+                    <div class="img">
+                        <img src="<?php bloginfo('template_directory'); ?>/img/hero_bg_img.png" alt="bg">
+                    </div>
+                </div>
             </div>
             <div class="container df jcsb aic">
                 <div class="block df fdc gap30">
@@ -14,7 +18,7 @@
                     </div>
                     <h1 class="mainTitle druk">Производство медицинских аптечек и укладок</h1>
                     <p class="subtitle">Комплектация медицинских наборов и укладок по приказам МЗ РФ</p>
-                    <a href="#" class="primaryBtn druk">Смотреть каталог</a>
+                    <a href="/catalog" class="primaryBtn druk">Смотреть каталог</a>
                 </div>
                 <div class="block img">
                     <img src="<?php bloginfo('template_directory'); ?>/img/hero_bg_doctor.png" alt="doctor">
