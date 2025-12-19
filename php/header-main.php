@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/dist/style.css">
+
     <title><?php the_title(); ?></title>
+    <?php wp_head(); ?>
 </head>
 
 <body class="page-main">
     <main>
         <?php include get_template_directory() . '/inc/mobile-menu.php'; ?>
+        <?php include get_template_directory() . '/inc/shared/added.php'; ?>
         <header class="header section mainHeader">
             <div class="container df fdc gap40">
                 <div class="row top df aic jcsb">

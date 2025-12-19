@@ -2,136 +2,20 @@
 /*
  Template name: Страница каталога
  */
-get_header(); ?>
+get_header(); 
+$is_shop = function_exists('is_shop') && is_shop();
+$is_cat = function_exists('is_product_category') && is_product_category();
 
-        <section class="pageCatalog catalog section">
-            <div class="container df fdc gap30">
-                <h2 class="sectionTitle druk">Каталог</h2>
-                <div class="content df fww ais gap20">
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="#" class="item df fdc gap20">
-                        <div class="img">
-                            <img src="<?php bloginfo('template_directory'); ?>/img/catalog_001.png" alt="item">
-                        </div>
-                        <p class="title druk">Наборы реанимационные</p>
-                        <div class="btn df aic gap5 redBtn">
-                            <p>смотреть</p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.72665 11.06L8.77999 8L5.72665 4.94L6.66665 4L10.6667 8L6.66665 12L5.72665 11.06Z" />
-                            </svg>
-
-                        </div>
-                    </a>
-                    <a href="/faq" class="seeMore mobile">Показать еще</a>
-                </div>
-            </div>
-        </section>
-
-
+?>
+<section class="pageCatalog catalog section mainGoods">
+    <div class="container df fdc gap30">
+        <?php
+        if ($is_shop) {
+            include get_template_directory() . '/inc/page-catalog/catalog.php';
+        } elseif ($is_cat) {
+            include get_template_directory() . '/inc/page-catalog/category.php';
+        }
+        ?>
+    </div>
+</section>
 <?php get_footer(); ?>

@@ -8,117 +8,67 @@
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
 	define( '_S_VERSION', '1.0.0' );
 }
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function arismed_setup() {
-	/*
-		* Make theme available for translation.
-		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on arismed, use a find and replace
-		* to change 'arismed' to the name of your theme in all the template files.
-		*/
-	load_theme_textdomain( 'arismed', get_template_directory() . '/languages' );
+if ( ! function_exists( 'arismed_setup' ) ) :
+	function arismed_setup() {
+		load_theme_textdomain( 'arismed', get_template_directory() . '/languages' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'post-thumbnails' );
 
-	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
-	add_theme_support( 'title-tag' );
-
-	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
-	add_theme_support( 'post-thumbnails' );
-
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'menu-1' => esc_html__( 'Primary', 'arismed' ),
-		)
-	);
-
-	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background',
-		apply_filters(
-			'arismed_custom_background_args',
+		register_nav_menus(
 			array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
+				'menu-1' => esc_html__( 'Primary', 'arismed' ),
 			)
-		)
-	);
+		);
 
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+		add_theme_support(
+			'html5',
+			array(
+				'search-form',
+				'comment-form',
+				'comment-list',
+				'gallery',
+				'caption',
+				'style',
+				'script',
+			)
+		);
 
-	/**
-	 * Add support for core custom logo.
-	 *
-	 * @link https://codex.wordpress.org/Theme_Logo
-	 */
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
-}
+		add_theme_support(
+			'custom-background',
+			apply_filters(
+				'arismed_custom_background_args',
+				array(
+					'default-color' => 'ffffff',
+					'default-image' => '',
+				)
+			)
+		);
+
+		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		add_theme_support(
+			'custom-logo',
+			array(
+				'height'      => 250,
+				'width'       => 250,
+				'flex-width'  => true,
+				'flex-height' => true,
+			)
+		);
+	}
+endif;
 add_action( 'after_setup_theme', 'arismed_setup' );
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
 function arismed_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'arismed_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'arismed_content_width', 0 );
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
 function arismed_widgets_init() {
 	register_sidebar(
 		array(
@@ -134,9 +84,6 @@ function arismed_widgets_init() {
 }
 add_action( 'widgets_init', 'arismed_widgets_init' );
 
-/**
- * Enqueue scripts and styles.
- */
 function arismed_scripts() {
 	wp_enqueue_style( 'arismed-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'arismed-style', 'rtl', 'replace' );
@@ -149,32 +96,32 @@ function arismed_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'arismed_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
 require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
 require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
 require get_template_directory() . '/inc/customizer.php';
 
-/**
- * Load Jetpack compatibility file.
- */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+add_action('wp_enqueue_scripts', function () {
+    wp_deregister_style('woocommerce-general');
+    wp_deregister_style('woocommerce-layout');
+    wp_deregister_style('woocommerce-smallscreen');
+    wp_deregister_style('woocommerce-inline');
+    wp_deregister_style('select2');
+    wp_deregister_style('woocommerce_prettyPhoto_css');
+    wp_deregister_style('woocommerce_frontend_styles');
+    wp_deregister_style('woocommerce-blocktheme');
+    wp_deregister_style('wc-blocks-style');
+    wp_deregister_style('wc-blocks-vendors-style');
+}, 100);
+
+add_action('after_setup_theme', function () {
+    remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+    remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+    remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+}, 100);
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
@@ -192,21 +139,49 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_localize_script('arismed-main', 'ARISMED', [
         'wc_ajax' => home_url('/?wc-ajax='),
+        'cart_nonce' => wp_create_nonce('arismed_cart'),
+        'endpoints' => [
+            'mini_cart' => 'arismed_mini_cart',
+            'sync' => 'arismed_cart_sync',
+            'remove' => 'arismed_cart_remove',
+            'update_qty' => 'arismed_cart_update_qty',
+        ],
     ]);
 }, 110);
-
-// мини-корзина
 
 add_action('wc_ajax_arismed_mini_cart', 'arismed_mini_cart');
 add_action('wc_ajax_nopriv_arismed_mini_cart', 'arismed_mini_cart');
 
-function arismed_mini_cart() {
-    if (function_exists('wc_load_cart') && null === WC()->cart) {
+add_action('wc_ajax_arismed_cart_sync', 'arismed_cart_sync');
+add_action('wc_ajax_nopriv_arismed_cart_sync', 'arismed_cart_sync');
+
+add_action('wc_ajax_arismed_cart_remove', 'arismed_cart_remove');
+add_action('wc_ajax_nopriv_arismed_cart_remove', 'arismed_cart_remove');
+
+add_action('wc_ajax_arismed_cart_update_qty', 'arismed_cart_update_qty');
+add_action('wc_ajax_nopriv_arismed_cart_update_qty', 'arismed_cart_update_qty');
+
+function arismed_cart_ensure_loaded() {
+    if (!function_exists('WC')) return false;
+
+    if (function_exists('wc_load_cart') && (null === WC()->cart || !WC()->cart)) {
         wc_load_cart();
     }
 
-    if (WC()->cart) {
-        WC()->cart->calculate_totals();
+    if (!WC()->cart) return false;
+
+    WC()->cart->calculate_totals();
+    return true;
+}
+
+function arismed_cart_nonce_ok($nonce) {
+    $nonce = is_string($nonce) ? $nonce : '';
+    return $nonce && wp_verify_nonce($nonce, 'arismed_cart');
+}
+
+function arismed_mini_cart() {
+    if (!arismed_cart_ensure_loaded()) {
+        wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
 
     ob_start();
@@ -214,23 +189,167 @@ function arismed_mini_cart() {
     $html = ob_get_clean();
 
     wp_send_json([
+        'ok' => true,
         'html' => $html,
-        'count' => WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0,
+        'count' => (int) WC()->cart->get_cart_contents_count(),
     ]);
 }
 
-// удаление позиции из заказа
+function arismed_cart_payload() {
+    ob_start();
+    arismed_render_mini_cart_items();
+    $items = ob_get_clean();
 
-add_action('wc_ajax_arismed_remove_from_cart', 'arismed_remove_from_cart');
-add_action('wc_ajax_nopriv_arismed_remove_from_cart', 'arismed_remove_from_cart');
+    ob_start();
+    arismed_render_mini_cart_total();
+    $total = ob_get_clean();
 
-function arismed_remove_from_cart() {
-    if (!function_exists('WC') || !WC()->cart) {
+    ob_start();
+    arismed_render_mini_cart_count();
+    $count_html = ob_get_clean();
+
+    ob_start();
+    arismed_render_cart_page_items();
+    $cart_page_items_html = ob_get_clean();
+
+    ob_start();
+    arismed_render_cart_page_total();
+    $cart_page_total_html = ob_get_clean();
+
+    return [
+        'ok' => true,
+        'count' => (int) WC()->cart->get_cart_contents_count(),
+        'count_html' => $count_html,
+        'items_html' => $items,
+        'total_html' => $total,
+        'cart_page_items_html' => $cart_page_items_html,
+        'cart_page_total_html' => $cart_page_total_html,
+        'cart_hash' => WC()->cart->get_cart_hash(),
+    ];
+}
+
+function arismed_render_cart_page_items() {
+    $cart = WC()->cart;
+    if (!$cart) return;
+
+    $items = $cart->get_cart();
+    $currency = get_woocommerce_currency_symbol();
+    $decimals = (int) wc_get_price_decimals();
+
+    $fmt_price = function ($v) use ($decimals) {
+        $v = (float) $v;
+        $use_decimals = $decimals > 0 && abs($v - round($v)) > 0.000001;
+        return number_format_i18n($v, $use_decimals ? $decimals : 0);
+    };
+
+    if (!$items) {
+        ?>
+        <div class="row unit df aic gap60">
+            <div class="block df aic gap30">
+                <p class="name druk">Корзина пуста</p>
+            </div>
+        </div>
+        <?php
+        return;
+    }
+
+    foreach ($items as $cart_item_key => $cart_item) {
+        $product = $cart_item['data'] ?? null;
+        if (!$product || !$product->exists()) continue;
+
+        $qty = (int) ($cart_item['quantity'] ?? 0);
+        if ($qty <= 0) continue;
+
+        $name = $product->get_name();
+
+        $img_id = (int) $product->get_image_id();
+        $img = $img_id ? wp_get_attachment_image_url($img_id, 'woocommerce_thumbnail') : '';
+
+        $product_id = (int) ($cart_item['product_id'] ?? 0);
+        $link = $product_id ? get_permalink($product_id) : '';
+
+        $price_now = (float) wc_get_price_to_display($product, ['qty' => 1]);
+        $price_old = 0.0;
+
+        if ($product->is_on_sale()) {
+            $regular = (float) wc_get_price_to_display($product, ['qty' => 1, 'price' => $product->get_regular_price()]);
+            if ($regular > 0 && $regular > $price_now) $price_old = $regular;
+        }
+        ?>
+        <div class="row unit df aic gap60" data-key="<?php echo esc_attr($cart_item_key); ?>">
+            <div class="block df aic gap30">
+                <div class="img">
+                    <?php if ($img) : ?>
+                        <?php if ($link) : ?>
+                            <a href="<?php echo esc_url($link); ?>">
+                                <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
+                            </a>
+                        <?php else : ?>
+                            <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+                <?php if ($link) : ?>
+                    <a class="name druk" href="<?php echo esc_url($link); ?>"><?php echo esc_html($name); ?></a>
+                <?php else : ?>
+                    <p class="name druk"><?php echo esc_html($name); ?></p>
+                <?php endif; ?>
+            </div>
+
+            <div class="block df aic gap30">
+                <?php if ($price_old > 0) : ?>
+                    <p class="old"><?php echo esc_html($fmt_price($price_old)); ?><span class="currency"><?php echo esc_html($currency); ?></span></p>
+                <?php endif; ?>
+                <p class="new druk"><?php echo esc_html($fmt_price($price_now)); ?><span class="currency"><?php echo esc_html($currency); ?></span></p>
+            </div>
+
+            <div class="quantity df aic gap20">
+                <div class="dec btn" data-action="dec" role="button" tabindex="0" aria-label="Уменьшить">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.2498 9.74854H3.74976V8.24854H14.2498V9.74854Z" />
+                    </svg>
+                </div>
+                <p class="count" data-count><?php echo (int) $qty; ?></p>
+                <div class="inc btn" data-action="inc" role="button" tabindex="0" aria-label="Увеличить">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.2498 9.74976H9.74976V14.2498H8.24976V9.74976H3.74976V8.24976H8.24976V3.74976H9.74976V8.24976H14.2498V9.74976Z" />
+                    </svg>
+                </div>
+            </div>
+
+            <p class="cancel df aic jcc" data-action="remove" role="button" tabindex="0" aria-label="Удалить">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
+                </svg>
+            </p>
+        </div>
+        <?php
+    }
+}
+
+function arismed_render_cart_page_total() {
+    if (!WC()->cart) return;
+    $total = (float) WC()->cart->get_total('edit');
+    $currency = get_woocommerce_currency_symbol();
+    echo esc_html(number_format_i18n($total, 0)) . '<span class="currency">' . esc_html($currency) . '</span>';
+}
+
+
+function arismed_cart_sync() {
+    if (!arismed_cart_ensure_loaded()) {
+        wp_send_json_error(['message' => 'Cart unavailable'], 400);
+    }
+
+    wp_send_json(arismed_cart_payload());
+}
+
+function arismed_cart_remove() {
+    if (!arismed_cart_ensure_loaded()) {
         wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
 
     $nonce = isset($_POST['nonce']) ? sanitize_text_field((string) $_POST['nonce']) : '';
-    if (!$nonce || !wp_verify_nonce($nonce, 'arismed_cart')) {
+    if (!arismed_cart_nonce_ok($nonce)) {
         wp_send_json_error(['message' => 'Bad nonce'], 403);
     }
 
@@ -242,10 +361,99 @@ function arismed_remove_from_cart() {
     WC()->cart->remove_cart_item($key);
     WC()->cart->calculate_totals();
 
-    WC_AJAX::get_refreshed_fragments();
+    wp_send_json(arismed_cart_payload());
 }
 
-// AJAX для одиночного продукта
+function arismed_cart_update_qty() {
+    if (!arismed_cart_ensure_loaded()) {
+        wp_send_json_error(['message' => 'Cart unavailable'], 400);
+    }
+
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field((string) $_POST['nonce']) : '';
+    if (!arismed_cart_nonce_ok($nonce)) {
+        wp_send_json_error(['message' => 'Bad nonce'], 403);
+    }
+
+    $key = isset($_POST['key']) ? wc_clean((string) $_POST['key']) : '';
+    $qty = isset($_POST['qty']) ? (int) $_POST['qty'] : 1;
+    $qty = max(1, $qty);
+
+    if (!$key || !WC()->cart->get_cart_item($key)) {
+        wp_send_json_error(['message' => 'Bad key'], 400);
+    }
+
+    WC()->cart->set_quantity($key, $qty, true);
+    WC()->cart->calculate_totals();
+
+    wp_send_json(arismed_cart_payload());
+}
+
+function arismed_render_mini_cart_count() {
+    $count = WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0;
+    echo (int) $count;
+}
+
+function arismed_render_mini_cart_items() {
+    $cart = WC()->cart;
+    if (!$cart) return;
+
+    $currency = get_woocommerce_currency_symbol();
+    $nonce = wp_create_nonce('arismed_cart');
+
+    if ($cart->is_empty()) {
+        echo '<p class="empty">Корзина пуста</p>';
+        return;
+    }
+
+    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+        $product = $cart_item['data'] ?? null;
+        if (!$product || !$product->exists()) continue;
+
+        $qty = (int) ($cart_item['quantity'] ?? 0);
+        if ($qty <= 0) continue;
+
+        $name = $product->get_name();
+        $img_id = (int) $product->get_image_id();
+        $img = $img_id ? wp_get_attachment_image_url($img_id, 'woocommerce_thumbnail') : '';
+
+        $unit = (float) wc_get_price_to_display($product, ['qty' => 1]);
+        $decimals = (int) wc_get_price_decimals();
+        $use_decimals = $decimals > 0 && abs($unit - round($unit)) > 0.000001;
+        $unit_str = number_format_i18n($unit, $use_decimals ? $decimals : 0);
+        ?>
+        <div class="item df aic gap20" data-key="<?php echo esc_attr($cart_item_key); ?>">
+            <div class="img">
+                <?php if ($img) : ?>
+                    <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
+                <?php endif; ?>
+            </div>
+
+            <div class="text df fdc gap10">
+                <p class="name"><?php echo esc_html($name); ?></p>
+                <p class="cost druk">
+                    <span class="number"><?php echo esc_html((string) $qty); ?></span>
+                    <span>x</span>
+                    <span class="sum"><?php echo esc_html($unit_str); ?><span class="currency"><?php echo esc_html($currency); ?></span></span>
+                </p>
+            </div>
+
+            <button class="delete" type="button" aria-label="Удалить" data-nonce="<?php echo esc_attr($nonce); ?>">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
+                </svg>
+            </button>
+        </div>
+        <?php
+    }
+}
+
+function arismed_render_mini_cart_total() {
+    if (!WC()->cart) return;
+
+    $total = (float) WC()->cart->get_total('edit');
+    $currency = get_woocommerce_currency_symbol();
+    echo esc_html(number_format_i18n($total, 0)) . '<span class="currency">' . esc_html($currency) . '</span>';
+}
 
 add_filter('woocommerce_product_single_add_to_cart_text', '__return_false');
 add_filter('woocommerce_product_supports', function ($supports, $feature, $product) {
@@ -261,105 +469,80 @@ add_action('wp_enqueue_scripts', function () {
     }
 });
 
-// убрать tiny MCE при создании товара
-
 add_action('init', function () {
     remove_post_type_support('product', 'editor');
     remove_post_type_support('product', 'excerpt');
 });
 
-// шорткод корзины
+// своя страница магазина и категории
 
-add_shortcode('arismed_cart', function () {
-    if (!function_exists('WC') || !WC()->cart) return '';
+add_filter('template_include', function ($template) {
+    if (
+        function_exists('is_shop') && is_shop() ||
+        function_exists('is_product_category') && is_product_category()
+    ) {
+        $t = get_stylesheet_directory() . '/page/catalog.php';
+        if (file_exists($t)) return $t;
+    }
+    return $template;
+}, 999);
 
-    ob_start();
+// перенаправление ссылок для каталога
 
-    $cart = WC()->cart;
-    ?>
-    <form method="post" action="<?php echo esc_url(wc_get_cart_url()); ?>" class="woocommerce-cart-form">
-    <section class="cart section">
-        <div class="container df fdc gap30">
-            <h2 class="sectionTitle druk">Корзина</h2>
+add_action('init', function () {
+    add_rewrite_rule(
+        '^catalog/([^/]+)/page/([0-9]+)/?$',
+        'index.php?product_cat=$matches[1]&paged=$matches[2]',
+        'top'
+    );
 
-            <div class="content df fdc gap10">
-                <?php if ($cart->is_empty()) : ?>
-                    <p class="empty">Сейчас ваша корзина пуста!</p>
-                <?php else : ?>
-                    <?php foreach ($cart->get_cart() as $key => $item) :
-                        $p = $item['data'] ?? null;
-                        if (!$p || !$p->exists()) continue;
+    add_rewrite_rule(
+        '^catalog/([^/]+)/([^/]+)/?$',
+        'index.php?post_type=product&name=$matches[2]',
+        'top'
+    );
 
-                        $qty = (int) ($item['quantity'] ?? 0);
-                        if ($qty <= 0) continue;
+    add_rewrite_rule(
+        '^catalog/([^/]+)/?$',
+        'index.php?product_cat=$matches[1]',
+        'top'
+    );
+}, 20);
 
-                        $name = $p->get_name();
-                        $img = $p->get_image('woocommerce_thumbnail');
-                        $regular = (float) $p->get_regular_price();
-                        $sale    = (float) $p->get_sale_price();
+// вставка линка на магазин в хлебные крошки
 
-                        $price_regular_html = $regular > 0
-                            ? wc_price(wc_get_price_to_display($p, ['price' => $regular]))
-                            : '';
+add_filter('woocommerce_get_breadcrumb', function ($crumbs) {
+    if (!function_exists('wc_get_page_id')) return $crumbs;
 
-                        $price_sale_html = ($sale > 0 && $sale < $regular)
-                            ? wc_price(wc_get_price_to_display($p, ['price' => $sale]))
-                            : '';
-                        $remove = wc_get_cart_remove_url($key);
-                        ?>
-                        <div class="row unit df aic gap60" data-key="<?php echo esc_attr($key); ?>">
-                            <div class="block df aic gap30">
-                                <div class="img"><?php echo $img; ?></div>
-                                <p class="name"><?php echo esc_html($name); ?></p>
-                            </div>
-                            
-                            <div class="block df aic gap30 prices">
-                                <?php if ($price_sale_html) : ?>
-                                    <p class="old"><?php echo $price_regular_html; ?></p>
-                                    <p class="new"><?php echo $price_sale_html; ?></p>
-                                <?php else : ?>
-                                    <p class="new"><?php echo $price_regular_html; ?></p>
-                                <?php endif; ?>
-                            </div>
+    $shop_id = wc_get_page_id('shop');
+    if ($shop_id <= 0) return $crumbs;
 
-                            <div class="quantity df aic gap20" data-key="<?php echo esc_attr($key); ?>">
-                                <div class="dec btn">-</div>
-                                <p class="count"><?php echo esc_html((string)$qty); ?></p>
-                                <div class="inc btn">+</div>
+    if (
+        !(function_exists('is_product_category') && is_product_category()) &&
+        !(function_exists('is_product') && is_product())
+    ) {
+        return $crumbs;
+    }
 
-                                <input
-                                    type="number"
-                                    class="qtyInput"
-                                    name="<?php echo esc_attr("cart[{$key}][qty]"); ?>"
-                                    value="<?php echo esc_attr((string)$qty); ?>"
-                                    min="1"
-                                    step="1"
-                                    inputmode="numeric"
-                                    style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
-                                >
-                            </div>
+    $shop_url = get_permalink($shop_id);
+    $shop_title = get_the_title($shop_id);
 
-                            <a class="cancel df aic jcc" href="<?php echo esc_url($remove); ?>">×</a>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+    foreach ($crumbs as $c) {
+        $u = isset($c[1]) ? (string) $c[1] : '';
+        $t = isset($c[0]) ? (string) $c[0] : '';
+        if (($u && untrailingslashit($u) === untrailingslashit($shop_url)) || ($t === $shop_title)) {
+            return $crumbs;
+        }
+    }
 
-            <div class="controls df fdc gap40">
-                <p class="legend overall df aic gap20">
-                    Итого:
-                    <span class="sum"><?php echo wp_kses_post($cart->get_cart_total()); ?></span>
-                </p>
-                <a href="<?php echo esc_url(wc_get_checkout_url()); ?>" class="toCheckout btn df aic gap10" id="toCheckout">
-                    <span class="druk">Перейти к оформлению заказа</span>
-                </a>
-            </div>
-        </div>
-    </section>
-    <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
-    <button type="submit" name="update_cart" value="1" style="display:none;"></button>
-    </form>
-    <?php
+    $shop = [$shop_title, $shop_url];
 
-    return ob_get_clean();
-});
+    $out = [];
+    foreach ($crumbs as $i => $c) {
+        $out[] = $c;
+        if ($i === 0) $out[] = $shop;
+    }
+
+    return $out;
+}, 10);
+

@@ -59,12 +59,31 @@ html {
 body {
     background: $bg;
     color: $black;
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 a {
     display: flex;
     text-decoration: none;
     color: inherit;
+    border: none;
+
+    &:visited {
+        color: inherit;
+        border: none;
+    }
+
+    &:active {
+        border: none;
+    }
+
+    &:focus {
+        border: none;
+    }
+}
+
+p {
+    margin: 0px;
 }
 
 button {
@@ -110,12 +129,12 @@ ol {
 }
 
 .druk {
-    font-family: 'Druk';
+    font-family: 'Montserrat';
 }
 
 .sectionTitle {
-    font-size: 2.7rem;
-    font-weight: bold;
+    font-size: 3.2rem;
+    font-weight: 800;
 
     @include mobile {
         font-size: 2.2rem;
@@ -229,7 +248,6 @@ ol {
 .seeMore.mobile {
     width: 100%;
     font-size: 1.3rem;
-    font-family: 'Druk', sans-serif;
     justify-content: center;
     padding: 1.8rem;
     border-radius: 10rem;
@@ -368,7 +386,6 @@ span.currency {
     & .menu a {
         font-size: 1.9rem;
         font-weight: bold;
-        font-family: 'Druk', sans-serif;
     }
 
     & svg {
@@ -377,7 +394,7 @@ span.currency {
 
     & .phone {
         & p {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
 
     }
@@ -424,6 +441,38 @@ span.currency {
 
         & svg {
             fill: $black;
+        }
+    }
+}
+
+.added {
+    padding: 2rem;
+    border-radius: 1rem;
+    background: #2D3A4FB2;
+    width: fit-content;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 200;
+    color: $white;
+    font-size: 1.3rem;
+    transform: translateX(50%);
+    opacity: 0;
+    transition: 1s ease-out;
+
+    &.show {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    & .img {
+        background: $white;
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+
+        & svg {
+            fill: $red;
         }
     }
 }
@@ -477,8 +526,8 @@ main {
     & .menu .link {
         color: $white;
         background: $tpr;
-        font-family: 'Druk', sans-serif;
-        font-weight: 500;
+        font-size: 1.8rem;
+        font-weight: 700;
     }
 
     &.mainHeader {
@@ -512,7 +561,7 @@ main {
         & .menu .link {
             color: $white;
             background: $tpr;
-            font-family: 'Druk', sans-serif;
+            font-size: 1.5rem;
             font-weight: 500;
         }
 
@@ -520,8 +569,8 @@ main {
             color: $white;
 
             & p {
-                font-size: 3.2rem;
-                font-weight: 800;
+                font-size: 1.8rem;
+                font-weight: 700;
             }
         }
     }
@@ -543,6 +592,11 @@ main {
                     fill: $white;
                 }
             }
+        }
+
+        & p {
+            font-size: 1.8rem;
+            font-weight: 700;
         }
     }
 
@@ -645,12 +699,13 @@ main {
     & .menu {
         & .link {
             border-radius: $br10;
-            font-size: 1.1rem;
             color: $black;
             padding: 1.35rem 2.2rem;
             background: $white;
             backdrop-filter: blur(4px);
             transition: .3s ease;
+            font-size: 1.5rem;
+            font-weight: 500;
 
             &:hover {
                 background: $red;
@@ -705,6 +760,7 @@ main {
             padding: 1.5rem;
             border-radius: 1rem;
             background: #EFF5F7;
+            position: relative;
 
             & .img {
                 width: 7rem;
@@ -725,15 +781,23 @@ main {
 
                 & .name {
                     font-size: 1.3rem;
+                    max-width: 90%;
+                }
+
+                & .cost {
+                    font-size: 1.5rem;
+                    font-weight: 700;
                 }
             }
         }
 
         & .overall {
             margin-left: auto;
+            font-size: 1.5rem;
 
             & .sum {
                 font-size: 2.7rem;
+                font-weight: 700;
             }
         }
 
@@ -743,8 +807,9 @@ main {
             border-radius: 10rem;
             padding: 1.8rem;
             color: $white;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             transition: .3s ease;
+            font-weight: 700;
 
             &:hover {
                 background: $redHover;
@@ -752,20 +817,51 @@ main {
         }
 
         & .delete {
-            width: 1.1rem;
-            height: 1px;
-            background: $black;
-            transform: rotate(45deg);
-            position: relative;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 1.8rem;
+            height: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            padding: 0rem;
+            outline: none;
+            cursor: pointer;
 
-            &::after {
-                position: absolute;
-                top: 0px;
-                left: 0px;
+            & svg {
+                fill: $black;
+                transition: .3s ease;
+            }
+
+            &:hover {
+                outline: none;
+                border: none;
+
+                & svg {
+                    fill: $red;
+                }
+            }
+
+            & span {
                 width: 1.1rem;
                 height: 1px;
                 background: $black;
-                transform: rotate(-135deg);
+                transform: rotate(45deg);
+                position: relative;
+                display: block;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 1.1rem;
+                    height: 1px;
+                    background: $black;
+                    transform: rotate(-90deg);
+                }
             }
         }
     }
@@ -875,9 +971,9 @@ main {
     }
 
     & .mainTitle {
-        font-size: 4.6rem;
-        line-height: 5.2rem;
-        font-weight: bold;
+        font-size: 6.1rem;
+        line-height: 5.5rem;
+        font-weight: 800;
         max-width: 60%;
 
         @include mobile {
@@ -910,7 +1006,7 @@ main {
 
     & .subtitle {
         font-size: 1.8rem;
-        max-width: 40%;
+        max-width: 44rem;
         font-weight: 400;
 
         @include mobile {
@@ -922,7 +1018,7 @@ main {
     & .primaryBtn {
         padding: 1.8rem 2.4rem;
         border-radius: $br10;
-        font-size: 1.3rem;
+        font-size: 1.8rem;
         font-weight: bold;
         background: $red;
         width: fit-content;
@@ -986,8 +1082,8 @@ main {
 
         & .title {
             padding-left: 7.5rem;
-            font-size: 1.5rem;
-            font-weight: 500;
+            font-size: 1.8rem;
+            font-weight: 800;
         }
 
         & .text {
@@ -1000,6 +1096,17 @@ main {
 .catalog {
     position: relative;
     overflow: hidden;
+
+    & .category {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        & .item {
+            max-width: 28.5rem;
+            width: 100%;
+        }
+    }
 
     &.pageCatalog {
         background: $gray;
@@ -1077,8 +1184,9 @@ main {
         }
 
         & .title {
-            font-size: 1.5rem;
-            font-weight: 500;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: normal;
         }
 
         & .btn {
@@ -1128,11 +1236,13 @@ main {
         }
     }
 
-    & .slider {
+    & .slider,
+    & .category {
         width: 100%;
         position: inherit;
 
-        & .slide {
+        & .slide,
+        & .item {
             max-width: 28.5rem;
             padding: 2rem;
             border-radius: 1rem;
@@ -1165,14 +1275,15 @@ main {
             }
 
             & .title {
-                font-size: 1.5rem;
-                font-weight: 500;
+                font-size: 1.8rem;
+                font-weight: 700;
+                line-height: normal;
             }
 
             & .price {
-                font-family: 'Druk';
-                font-size: 2rem;
-                font-weight: 500;
+                // font-family: 'Druk';
+                font-size: 2.2rem;
+                font-weight: 700;
                 color: $red;
 
                 & .woocommerce-Price-currencySymbol {
@@ -1265,7 +1376,8 @@ main {
     & .top {
         & .link {
             color: $red;
-            font-size: 15px;
+            font-size: 1.8rem;
+            font-weight: 800;
 
             @include mobile {
                 display: none;
@@ -1304,6 +1416,12 @@ main {
                 max-height: 18rem;
             }
 
+            & .title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                line-height: normal;
+            }
+
             & .text {
                 padding: 2rem;
                 font-size: 1.5rem;
@@ -1327,8 +1445,9 @@ main {
 
     & .top {
         & .link {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: $red;
+            font-weight: 800;
 
             @include mobile {
                 display: none;
@@ -1358,8 +1477,9 @@ main {
             }
 
             & .question {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 max-width: 95%;
+                font-weight: 700;
 
                 @include mobile {
                     max-width: 85%;
@@ -1534,8 +1654,8 @@ main {
     }
 
     & h3 {
-        font-size: 1.5rem;
-        font-weight: 500;
+        font-size: 1.8rem;
+        font-weight: 700;
     }
 
     & ul {
@@ -1587,7 +1707,7 @@ main {
         }
 
         & .phone {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: $white;
         }
@@ -1818,6 +1938,22 @@ section.card {
         max-width: calc(50% - 1.5rem);
         width: 100%;
         overflow: hidden;
+
+        & .notice {
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+
+        & .notice.ok {
+            color: #2e7d32;
+            opacity: 1;
+        }
+
+        & .notice.err {
+            color: #c62828;
+            opacity: 1;
+        }
 
         & ul li {
             font-size: 1.3rem;
@@ -2089,9 +2225,11 @@ section.news {
             font-size: 1.8rem;
             font-weight: 700;
         }
+
         & .woocommerce-Price-currencySymbol {
             font-weight: 400;
         }
+
         & .quantity {
             margin-left: auto;
             font-size: 2.4rem;

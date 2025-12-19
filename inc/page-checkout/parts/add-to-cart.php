@@ -1,4 +1,4 @@
-<button type="submit" value="<?php echo esc_attr( $product->get_id() ); ?>" class="addToCart df aic gap10 single_add_to_cart_button button alt ajax_add_to_cart">
+<button class="addToCart df aic gap10 single_add_to_cart_button button alt ajax_add_to_cart">
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.5 12C3.675 12 3.0075 12.675 3.0075 13.5C3.0075 14.325 3.675 15 4.5 15C5.325 15 6 14.325 6 13.5C6 12.675 5.325 12 4.5 12ZM12 12C11.175 12 10.5075 12.675 10.5075 13.5C10.5075 14.325 11.175 15 12 15C12.825 15 13.5 14.325 13.5 13.5C13.5 12.675 12.825 12 12 12ZM10.9125 8.25C11.475 8.25 11.97 7.9425 12.225 7.4775L14.91 2.61C15.1875 2.115 14.8275 1.5 14.2575 1.5H3.1575L2.4525 0H0V1.5H1.5L4.2 7.1925L3.1875 9.0225C2.64 10.0275 3.36 11.25 4.5 11.25H13.5V9.75H4.5L5.325 8.25H10.9125ZM3.87 3H12.9825L10.9125 6.75H5.6475L3.87 3Z" />
     </svg>

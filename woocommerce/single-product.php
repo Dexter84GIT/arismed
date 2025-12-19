@@ -39,6 +39,14 @@ if ($gallery_ids) {
                             <?php endif; ?>
                         </div>
                         <div class="column df fdc gap30">
+                            <?php if ($article) : ?>
+                                <div class="row df fdc gap10 article">
+                                    <h3 class="druk">Артикул:</h3>
+                                        <div class="field list">
+                                            <?php echo $article; ?>
+                                        </div>
+                                    </div>
+                            <?php endif ?>
                             <?php if ($complectation) : ?>
                                 <?php include get_template_directory() . '/inc/page-checkout/parts/complectation.php'; ?> 
                             <?php endif ?>
@@ -55,14 +63,16 @@ if ($gallery_ids) {
 
                             <!-- добавить в корзину -->
                                 <div class="add df aic gap20">
-                                    <form class="add df aic gap20 cart" method="post" data-product_id="<?php echo esc_attr($product->get_id()); ?>">
+                                    <form class="add df aic gap20 cart" data-product_id="<?php echo esc_attr($product->get_id()); ?>">
                                         <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>">
                                         <input type="hidden" name="quantity" value="1">
                                         <?php include get_stylesheet_directory() . '/inc/page-checkout/parts/quantity.php'; ?>
                                         <?php include get_stylesheet_directory() . '/inc/page-checkout/parts/add-to-cart.php'; ?>
                                     </form>
-                                    <span class="notice"></span>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <span class="notice"></span>
                             </div>
                         </div>
                     </div>

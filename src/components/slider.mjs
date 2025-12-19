@@ -1,87 +1,94 @@
 const slider = () => {
-    const goodsSlider = new Swiper('.goodsSlider', {
+  const hasAnySwiperRoot =
+    document.querySelector(".swiper") ||
+    document.querySelector("[data-swiper]") ||
+    document.querySelector(".swiper-container") ||
+    document.querySelector(".slider");
+
+  if (!hasAnySwiperRoot) return;
+
+  const Sw = window.Swiper;
+  if (!Sw) return;
+
+  try {
+    if (document.querySelector(".goodsSlider")) {
+      new Sw(".goodsSlider", {
         spaceBetween: 20,
         slidesPerView: 4,
         loop: true,
-
         navigation: {
-            nextEl: '.goods .swiper-button-next',
-            prevEl: '.goods .swiper-button-prev',
+          nextEl: ".goods .swiper-button-next",
+          prevEl: ".goods .swiper-button-prev",
         },
-
         breakpoints: {
-            0: {
-                enabled: false,
-                slidesPerView: 'auto',
-                spaceBetween: 8,
-            },
-            768: {
-                enabled: true,
-                slidesPerView: 4,
-                spaceBetween: 20,
-            },
+          0: {
+            enabled: false,
+            slidesPerView: "auto",
+            spaceBetween: 8,
+          },
+          768: {
+            enabled: true,
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
         },
-    });
-    const neswSlider = new Swiper('.newsSlider', {
+      });
+    }
+
+    if (document.querySelector(".newsSlider")) {
+      new Sw(".newsSlider", {
         spaceBetween: 30,
         slidesPerView: 3,
         loop: true,
-
         navigation: {
-            nextEl: '.mainNews .swiper-button-next',
-            prevEl: '.mainNews .swiper-button-prev',
+          nextEl: ".mainNews .swiper-button-next",
+          prevEl: ".mainNews .swiper-button-prev",
         },
-
         breakpoints: {
-            0: {
-                enabled: false,
-                slidesPerView: 'auto',
-                spaceBetween: 8,
-            },
-            768: {
-                enabled: true,
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-        },
-    });
-    const productSlider = () => {
-        const mainWrapper = document.querySelector('.cardMainSlider .swiper-wrapper');
-        const thumbsWrapper = document.querySelector('.cardThumbsSlider .swiper-wrapper');
-
-        if (!mainWrapper || !thumbsWrapper) return;
-
-        mainWrapper.innerHTML = '';
-
-        thumbsWrapper.querySelectorAll('.swiper-slide').forEach((thumbSlide) => {
-            const clone = thumbSlide.cloneNode(true);
-            const img = clone.querySelector('img');
-            if (img && img.dataset.full) {
-                img.src = img.dataset.full;
-            }
-            mainWrapper.appendChild(clone);
-        });
-
-        const thumbs = new Swiper('.cardThumbsSlider', {
-            slidesPerView: 4,
+          0: {
+            enabled: false,
+            slidesPerView: "auto",
+            spaceBetween: 8,
+          },
+          768: {
+            enabled: true,
+            slidesPerView: 3,
             spaceBetween: 30,
-            freeMode: true,
-            watchSlidesProgress: true,
-            watchSlidesVisibility: true,
-            loop: true
-        });
+          },
+        },
+      });
+    }
 
-        const main = new Swiper('.cardMainSlider', {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            thumbs: {
-                swiper: thumbs,
-            },
-            loop: true
-        });
-    };
+    const mainWrapper = document.querySelector(".cardMainSlider .swiper-wrapper");
+    const thumbsWrapper = document.querySelector(".cardThumbsSlider .swiper-wrapper");
 
-    productSlider();
-}
+    if (mainWrapper && thumbsWrapper) {
+      mainWrapper.innerHTML = "";
 
-export default slider
+      thumbsWrapper.querySelectorAll(".swiper-slide").forEach((thumbSlide) => {
+        const clone = thumbSlide.cloneNode(true);
+        const img = clone.querySelector("img");
+        if (img && img.dataset.full) img.src = img.dataset.full;
+        mainWrapper.appendChild(clone);
+      });
+
+      const thumbs = new Sw(".cardThumbsSlider", {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        freeMode: true,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        loop: true,
+      });
+
+      new Sw(".cardMainSlider", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        thumbs: { swiper: thumbs },
+        loop: true,
+      });
+    }
+  } catch (e) {}
+};
+
+export default slider;

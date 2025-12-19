@@ -6,19 +6,18 @@ import drop from "./components/drop";
 import quantity from "./components/quantity";
 
 // woo
-import addToCart from "./components/add-to-cart.mjs";
-import { initMiniCartSync } from './components/miniCartSync.mjs'
-import { initMiniCartRemove } from "./components/deleteFromMiniCart.mjs";
-import quantityCart from "./components/quantityCart.mjs";
 
-accordeon()
-slider()
-mobileMenu()
-tabs()
-drop()
-quantity()
+import goodsAddToCart from "./components/goodsAddToCart.mjs";
+import { initMiniCartSync } from "./components/miniCartSync.mjs";
 
-addToCart()
-initMiniCartSync()
-initMiniCartRemove()
-quantityCart()
+accordeon();
+slider();
+mobileMenu();
+tabs();
+drop();
+quantity();
+
+// woo
+
+goodsAddToCart();
+initMiniCartSync();

@@ -52,7 +52,12 @@
                                     <p class="price">
                                         <?php echo wp_kses_post($price_html); ?>
                                     </p>
-                                    <a href="<?php echo $add_url; ?>" class="btn">В корзину</a>
+                                    <a
+                                      href="#"
+                                      class="btn ajaxAddToCart"
+                                      data-product_id="<?php echo esc_attr($product->get_id()); ?>"
+                                      data-qty="1"
+                                    >В корзину</a>
                                 </div>
                             </div>
                         <?php
