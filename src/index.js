@@ -4,20 +4,24 @@ import mobileMenu from "./components/mobileMenu.mjs";
 import tabs from "./components/tabs.mjs";
 import drop from "./components/drop";
 import quantity from "./components/quantity";
+import cookiePolicy from "./components/cookiePolicy.mjs";
+import headerSearch from "./components/headerSearch.mjs";
 
 // woo
-
 import goodsAddToCart from "./components/goodsAddToCart.mjs";
 import { initMiniCartSync } from "./components/miniCartSync.mjs";
 
-accordeon();
-slider();
-mobileMenu();
-tabs();
-drop();
-quantity();
+document.addEventListener('DOMContentLoaded', () => {
+    cookiePolicy();
+    accordeon();
+    slider();
+    mobileMenu();
+    tabs();
+    drop();
+    quantity();
+    headerSearch()
 
-// woo
-
-goodsAddToCart();
-initMiniCartSync();
+    // woo
+    goodsAddToCart();
+    initMiniCartSync();
+})

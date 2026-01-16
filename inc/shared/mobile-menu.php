@@ -1,13 +1,13 @@
         <div class="mobileMenu df fdc gap60">
             <div class="closeMenu df aic jcc"><span></span></div>
             <div class="top menu df fdc gap30">
-                <a href="#" class="link">Каталог</a>
-                <a href="#" class="link">Компания</a>
-                <a href="#" class="link">Документы</a>
-                <a href="#" class="link">Оплата и доставка</a>
-                <a href="#" class="link">Акции</a>
-                <a href="#" class="link">Новости</a>
-                <a href="#" class="link">Контакты</a>
+                <a href="/shop" class="link">Каталог</a>
+                <a href="/about" class="link">Компания</a>
+                <a href="/docs" class="link">Документы</a>
+                <a href="/delivery" class="link">Оплата и доставка</a>
+                <a href="/sales" class="link">Акции</a>
+                <a href="/news" class="link">Новости</a>
+                <a href="/contacts" class="link">Контакты</a>
             </div>
             <div class="bottom df fdc gap30">
                 <a href="tel:89639004208" target="_blank" class="phone df aic gap15">

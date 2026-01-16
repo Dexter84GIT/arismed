@@ -1,4 +1,4 @@
-<div class="row breadcrumbs df aic gap10">
+<div class="row breadcrumbs df aic gap10" itemprop="breadcrumb">
 <?php
 if (function_exists('woocommerce_breadcrumb')) {
     woocommerce_breadcrumb([

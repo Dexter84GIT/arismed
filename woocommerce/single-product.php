@@ -3,8 +3,8 @@ defined('ABSPATH') || exit;
 get_header();
 $product = wc_get_product( get_the_ID() );
 $article = get_field("article");
-$complectation = get_field("complectation");
 $conditions = get_field("conditions");
+$list = get_field("list");
 $description = get_field("description");
 $file = get_field('sertifikat');  
 $main_img = $product->get_image_id(); 
@@ -20,10 +20,10 @@ if ($gallery_ids) {
     }
 }         
 ?> 
-        <section class="card productCard section">
+        <section class="card productCard section" itemscope itemtype="https://schema.org/Product">
             <div class="container df fdc gap30">
-                <h2 class="sectionTitle druk"><?php the_title(); ?></h2>
-                <div class="content df fdc gap60">
+                <h2 class="sectionTitle druk" itemprop="name"><?php the_title(); ?></h2>
+                <div class="content df fdc gap30">
                     <div class="block info df aifs gap30">
                         <div class="column df fdc gap30">
                             <?php if ($main_img) : 
@@ -41,31 +41,29 @@ if ($gallery_ids) {
                         <div class="column df fdc gap30">
                             <?php if ($article) : ?>
                                 <div class="row df fdc gap10 article">
-                                    <h3 class="druk">Артикул:</h3>
+                                    <h3 class="druk" itemprop="brand">Артикул:</h3>
                                         <div class="field list">
                                             <?php echo $article; ?>
                                         </div>
                                     </div>
                             <?php endif ?>
-                            <?php if ($complectation) : ?>
-                                <?php include get_template_directory() . '/inc/page-checkout/parts/complectation.php'; ?> 
-                            <?php endif ?>
+
                             <?php if ($conditions) : ?>
                                 <?php include get_template_directory() . '/inc/page-checkout/parts/conditions.php'; ?> 
                             <?php endif ?>
-                            <div class="row df aife controls gap20 jcsb">
+                            <div class="row df aife controls gap20 jcsb" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                                 <div class="price df fdc gap10">
                                     <p class="label">Цена:</p>
-                                    <p class="value druk">
-                                        <?php echo esc_html( $product->get_regular_price() ); ?><span>₽</span>
+                                    <p class="value druk" itemprop="price">
+                                        <?php echo esc_html( $product->get_regular_price() ); ?><span itemprop="priceCurrency">₽</span>
                                     </p>
+                                    <link itemprop="availability" href="http://schema.org/InStock">
                                 </div>
 
                             <!-- добавить в корзину -->
-                                <div class="add df aic gap20">
+                                <div class="add df aife gap20">
                                     <form class="add df aic gap20 cart" data-product_id="<?php echo esc_attr($product->get_id()); ?>">
                                         <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>">
-                                        <input type="hidden" name="quantity" value="1">
                                         <?php include get_stylesheet_directory() . '/inc/page-checkout/parts/quantity.php'; ?>
                                         <?php include get_stylesheet_directory() . '/inc/page-checkout/parts/add-to-cart.php'; ?>
                                     </form>
@@ -76,19 +74,31 @@ if ($gallery_ids) {
                             </div>
                         </div>
                     </div>
-                    <!-- описание -->
-                    <?php if ($description) : ?>
-                    <div class="block description df fdc gap30">
-                        <h2 class="sectionTitle druk">Описание</h2>
-                        <?php echo $description; ?>
+                    <div class="block tabs df fdc gap10">
+                        <div class="controls df aic gap10">
+                            <?php if ($description) : ?>
+                                <p class="tab active">Описание</p>
+                            <?php endif ?>
+                            <?php if ($list) : ?>
+                                <p class="tab">Комплектация</p>
+                            <?php endif ?>
+                            <?php if ($file) : ?>
+                                <p class="tab">Скачать сертификат</p>                    
+                            <?php endif; ?>      
+                        </div>
+                        <?php if ($description) : ?>
+                            <div class="tabContent block description df fdc gap30 active" itemprop="description">
+                                <?php echo $description; ?>
+                            </div>
+                        <?php endif ?>
+                        <?php if ($list) : ?>
+                            <?php include get_template_directory() . '/inc/page-checkout/parts/complectation.php'; ?> 
+                        <?php endif; ?>  
+                        <?php if ($file) : ?>
+                            <?php include get_template_directory() . '/inc/page-checkout/parts/certificat.php'; ?> 
+                        <?php endif; ?>
                     </div>
-                    <?php endif ?>
-                    <!-- сертификат -->
-                    <?php if ($file) : ?>
-                        <?php include get_template_directory() . '/inc/page-checkout/parts/certificat.php'; ?> 
-                    <?php endif; ?>           
                 </div>
-
             </div>
         </section>
         <?php get_footer(); ?>

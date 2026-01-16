@@ -3,7 +3,6 @@
                 <div class="container df fdc gap30">
                     <div class="top df aic jcsb">
                         <h2 class="sectionTitle druk">Товары</h2>
-                        <a href="/catalog" class="link druk">Все товары</a>
                     </div>
                     <div class="content swiper slider slider4 goodsSlider">
                         <div class="swiper-wrapper">
@@ -15,6 +14,13 @@
                             'orderby' => 'rand',
                             'no_found_rows' => true,
                             'ignore_sticky_posts' => true,
+                                'meta_query' => [
+                                    [
+                                        'key'     => 'feature',
+                                        'value'   => '1',
+                                        'compare' => '=',
+                                    ],
+                                ],
                             'tax_query' => [
                                 [
                                     'taxonomy' => 'product_visibility',
@@ -39,25 +45,28 @@
                                 $add_url = esc_url($product->add_to_cart_url());
                                 $link_url = esc_url(get_permalink($product->get_id()));
                         ?>
-                            <div class="swiper-slide slide df fdc jcsb gap40">
+                            <div class="swiper-slide slide df fdc jcsb gap40" itemscope itemtype="https://schema.org/Product">
                                 <div class="top df fdc gap20">
-                                    <a class="img" href="<?php echo $link_url; ?>">
+                                    <a class="img" href="<?php echo $link_url; ?>" itemprop="image">
                                         <?php echo $img; ?>
                                     </a>
-                                    <a class="title druk" href="<?php echo $link_url; ?>">
+                                    <a class="title druk" href="<?php echo $link_url; ?>" itemprop="name">
                                         <?php echo esc_html($title); ?>
                                     </a>
+                                    <span class="brand" itemprop="brand"></span>
                                 </div>
-                                <div class="bottom df aic jcsb">
-                                    <p class="price">
+                                <div class="bottom df aic jcsb" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <p class="price" itemprop="price">
                                         <?php echo wp_kses_post($price_html); ?>
                                     </p>
+                                    <meta itemprop="priceCurrency" content="RUB">
                                     <a
                                       href="#"
                                       class="btn ajaxAddToCart"
                                       data-product_id="<?php echo esc_attr($product->get_id()); ?>"
                                       data-qty="1"
                                     >В корзину</a>
+                                    <link itemprop="availability" href="http://schema.org/InStock">
                                 </div>
                             </div>
                         <?php

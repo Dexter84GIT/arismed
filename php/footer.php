@@ -50,10 +50,16 @@
                     <a href="#" class="link druk">Новости</a>
                     <a href="#" class="link druk">Контакты</a>
                 </div>
-                <p class="disclaimer">Вся информация, представленная на сайте, включая цены, фотографии, наличие товаров и иные параметры, носит ознакомительный характер и не является публичной офертой.</p>
-                <div class="block df aic jcsb">
-                    <p class="copyright">2014 - 2025 © АРИСМЕД / Фармацевтическая лицензия № ЛО-18-02-000535 от 21 августа 2014 г.</p>
-                    <a href="#" class="policy">Политика конфиденциальности</a>
+                <div class="df fdc gap30">
+                    <p class="disclaimer">Вся информация, представленная на сайте, включая цены, фотографии, наличие товаров и иные параметры, носит ознакомительный характер и не является публичной офертой.</p>
+                    <div class="block df aic gap60">
+                        <a href="/policy-privacy-data" class="policy">Политика обработки персональных данных</a>
+                        <a href="/policy-cookies" class="policy">Политика использования файлов cookies</a>
+                        <a href="/publichnaya-oferta" class="policy">Публичная оферта</a>
+                    </div>
+                    <div class="block df aic jcsb">
+                        <p class="copyright">2014 - 2025 © АРИСМЕД / Фармацевтическая лицензия № ЛО-18-02-000535 от 21 августа 2014 г.</p>
+                    </div>
                 </div>
             </div>
         </footer>

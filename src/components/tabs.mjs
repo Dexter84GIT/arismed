@@ -1,7 +1,7 @@
 const tabs = () => {
     const wrapper = document.querySelector('.tabs')
     if (!wrapper) return
-
+    
     const controls = Array.from(wrapper.querySelectorAll('.tab'))
     const contents = Array.from(wrapper.querySelectorAll('.tabContent'))
 

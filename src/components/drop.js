@@ -1,16 +1,18 @@
 const drop = () => {
   const closeAll = () => {
     document.querySelectorAll(".dropBtn").forEach((btn) => {
-      const dropdown = btn.querySelector(".drop");
-      const img = btn.querySelector(".iconLink");
-      if (img) img.classList.remove("active");
-      if (dropdown) dropdown.classList.remove("active");
+      btn.querySelector(".drop")?.classList.remove("active");
+      btn.querySelector(".iconLink")?.classList.remove("active");
     });
   };
 
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
+
+    if (target.closest(".drop")) {
+      return;
+    }
 
     const btn = target.closest(".dropBtn");
 
@@ -22,13 +24,13 @@ const drop = () => {
     const dropdown = btn.querySelector(".drop");
     const img = btn.querySelector(".iconLink");
 
-    const isOpen = dropdown ? dropdown.classList.contains("active") : false;
+    const isOpen = dropdown?.classList.contains("active");
 
     closeAll();
 
     if (!isOpen) {
-      if (img) img.classList.add("active");
-      if (dropdown) dropdown.classList.add("active");
+      dropdown?.classList.add("active");
+      img?.classList.add("active");
     }
   });
 };

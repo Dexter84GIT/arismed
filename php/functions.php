@@ -476,73 +476,94 @@ add_action('init', function () {
 
 // своя страница магазина и категории
 
-add_filter('template_include', function ($template) {
-    if (
-        function_exists('is_shop') && is_shop() ||
-        function_exists('is_product_category') && is_product_category()
-    ) {
-        $t = get_stylesheet_directory() . '/page/catalog.php';
-        if (file_exists($t)) return $t;
-    }
-    return $template;
-}, 999);
+// add_filter('template_include', function ($template) {
+//     if (
+//         function_exists('is_shop') && is_shop() ||
+//         function_exists('is_product_category') && is_product_category()
+//     ) {
+//         $t = get_stylesheet_directory() . '/page/catalog.php';
+//         if (file_exists($t)) return $t;
+//     }
+//     return $template;
+// }, 999);
 
 // перенаправление ссылок для каталога
 
-add_action('init', function () {
-    add_rewrite_rule(
-        '^catalog/([^/]+)/page/([0-9]+)/?$',
-        'index.php?product_cat=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-
-    add_rewrite_rule(
-        '^catalog/([^/]+)/([^/]+)/?$',
-        'index.php?post_type=product&name=$matches[2]',
-        'top'
-    );
-
-    add_rewrite_rule(
-        '^catalog/([^/]+)/?$',
-        'index.php?product_cat=$matches[1]',
-        'top'
-    );
-}, 20);
+$catalog_links = get_template_directory() . '/functions/breadcrumbs_links.php';
+if (file_exists($catalog_links)) {
+    require_once $catalog_links;
+}
 
 // вставка линка на магазин в хлебные крошки
 
-add_filter('woocommerce_get_breadcrumb', function ($crumbs) {
-    if (!function_exists('wc_get_page_id')) return $crumbs;
+$breadcrumbs_links = get_template_directory() . '/functions/breadcrumbs_links.php';
+if (file_exists($breadcrumbs_links)) {
+    require_once $breadcrumbs_links;
+}
 
-    $shop_id = wc_get_page_id('shop');
-    if ($shop_id <= 0) return $crumbs;
+// чекаут
 
-    if (
-        !(function_exists('is_product_category') && is_product_category()) &&
-        !(function_exists('is_product') && is_product())
-    ) {
-        return $crumbs;
+$checkout_function = get_template_directory() . '/functions/checkout.php';
+if (file_exists($checkout_function)) {
+    require_once $checkout_function;
+}
+
+// биллинг
+
+$billing_form = get_template_directory() . '/functions/billing_form.php';
+if (file_exists($billing_form)) {
+    require_once $billing_form;
+}
+
+// регистрация
+
+$getRegister = get_template_directory() . '/functions/register.php';
+if (file_exists($getRegister)) {
+    require_once $getRegister;
+}
+
+// логин
+
+$getLogin = get_template_directory() . '/functions/login.php';
+if (file_exists($getLogin)) {
+    require_once $getLogin;
+}
+
+// поиск в шапке
+
+$headerSearch = get_template_directory() . '/functions/header_search.php';
+if (file_exists($headerSearch)) {
+    require_once $headerSearch;
+}
+
+// принудительно переключаем шаблон категорий
+
+add_filter('template_include', function ($template) {
+    if (function_exists('is_product_category') && is_product_category()) {
+        $t = get_template_directory() . '/taxonomy-product_cat.php';
+        if (is_readable($t)) return $t;
     }
-
-    $shop_url = get_permalink($shop_id);
-    $shop_title = get_the_title($shop_id);
-
-    foreach ($crumbs as $c) {
-        $u = isset($c[1]) ? (string) $c[1] : '';
-        $t = isset($c[0]) ? (string) $c[0] : '';
-        if (($u && untrailingslashit($u) === untrailingslashit($shop_url)) || ($t === $shop_title)) {
-            return $crumbs;
-        }
+    if (function_exists('is_shop') && is_shop()) {
+        $t = get_template_directory() . '/archive-product.php';
+        if (is_readable($t)) return $t;
     }
+    return $template;
+}, 99999);
 
-    $shop = [$shop_title, $shop_url];
+// опускаем yoast вниз
 
-    $out = [];
-    foreach ($crumbs as $i => $c) {
-        $out[] = $c;
-        if ($i === 0) $out[] = $shop;
+add_filter('wpseo_metabox_prio', function () {
+    return 'low';
+});
+
+// отключаем yoast seo для некоторых типов
+
+add_action('add_meta_boxes', function () {
+    $disable = [
+        'company_docs',
+    ];
+
+    foreach ($disable as $post_type) {
+        remove_meta_box('wpseo_meta', $post_type, 'normal');
     }
-
-    return $out;
-}, 10);
-
+}, 100);

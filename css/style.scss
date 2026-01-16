@@ -71,14 +71,22 @@ a {
     &:visited {
         color: inherit;
         border: none;
+        outline: none;
     }
 
     &:active {
         border: none;
+        outline: none;
     }
 
     &:focus {
         border: none;
+        outline: none;
+    }
+
+    &:hover {
+        color: inherit;
+        outline: none;
     }
 }
 
@@ -99,6 +107,7 @@ img {
 ul,
 ol {
     padding-left: 2rem;
+    margin: 0rem;
 }
 
 .section {
@@ -114,6 +123,11 @@ ol {
 .page {
     min-height: 100vh;
     position: relative;
+    margin: 0rem;
+}
+
+.post {
+    margin: 0rem;
 }
 
 .container {
@@ -134,10 +148,13 @@ ol {
 
 .sectionTitle {
     font-size: 3.2rem;
-    font-weight: 800;
+    font-weight: 600;
+    line-height: 3.2rem;
+    color: $black;
 
     @include mobile {
         font-size: 2.2rem;
+        line-height: 2.8rem;
     }
 }
 
@@ -224,6 +241,10 @@ ol {
 
 .gap60 {
     gap: 6rem;
+}
+
+.gap100 {
+    gap: 10rem;
 }
 
 .desktop {
@@ -401,6 +422,53 @@ span.currency {
 
     & .policy {
         font-size: 1.3rem;
+    }
+}
+
+#cookies {
+    display: none;
+    position: fixed;
+    opacity: 0;
+    z-index: 100;
+    bottom: 3rem;
+    right: 3rem;
+    max-width: 45rem;
+    width: 100%;
+    background: $white;
+    padding: 2rem;
+    box-shadow: 0px 20px 20px 0px #0000001c;
+    border-radius: 1rem;
+    transition: .3s ease;
+
+    &.active {
+        display: flex;
+        opacity: 1;
+    }
+
+    .text {
+        font-size: 1.3rem;
+        font-weight: 400;
+        line-height: 100%;
+
+        & a {
+            display: inline;
+            text-decoration: underline;
+        }
+    }
+
+    & button {
+        padding: 1.35rem 2.2rem;
+        border-radius: 10rem;
+        font-size: 1.3rem;
+        color: $white;
+        background: $darkBlue;
+        transition: .3s ease;
+        border: none;
+        font-weight: bold;
+
+        &:hover {
+            background: #4f94a3;
+        }
     }
 }
 
@@ -724,6 +792,7 @@ main {
         position: relative;
         z-index: 40;
         font-size: 1.3rem;
+        flex-wrap: wrap;
 
         & a {
             transition: .3s ease;
@@ -745,6 +814,73 @@ main {
         &.active {
             display: flex;
         }
+    }
+
+    & .drop.search {
+        width: 100%;
+    }
+
+    & .searchBtn {
+        max-height: 70vh;
+        overflow: auto;
+
+        & .search {
+            width: 100%;
+            background: $white;
+            border-radius: 1rem;
+            height: 0rem;
+            transition: .3s ease;
+            opacity: 0;
+
+            & input {
+                width: 100%;
+                padding: 1.4rem;
+                border-radius: 1rem;
+                font-size: 1.5rem;
+                outline: none;
+                border: 1px solid $blue;
+            }
+
+            & .result {
+                height: 0rem;
+                opacity: 0;
+                transition: .3s ease;
+
+                & .searchGroupTitle {
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    color: $black;
+                }
+
+                & .searchList {
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
+
+                    & a {
+                        font-size: 1.5rem;
+                        transition: .3s ease;
+                        color: $lightBlack;
+                        &:hover {
+                            color: $darkBlue;
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                padding: 2rem;
+                opacity: 1;
+                height: auto;
+
+                & .result {
+                    height: auto;
+                    opacity: 1;
+                }
+            }
+        }
+
     }
 
     & .miniCart {
@@ -950,12 +1086,15 @@ main {
             max-width: 120rem;
             margin: 0 auto;
             width: 100%;
+            height: 100%;
             justify-content: flex-end;
+            position: relative;
 
             & .img {
                 max-width: 76rem;
                 transform: translateY(-5%);
                 margin-left: auto;
+
             }
         }
 
@@ -1016,7 +1155,7 @@ main {
     }
 
     & .primaryBtn {
-        padding: 1.8rem 2.4rem;
+        padding: 1.8rem 3.6rem;
         border-radius: $br10;
         font-size: 1.8rem;
         font-weight: bold;
@@ -1174,6 +1313,15 @@ main {
         height: auto;
         background: $white;
         box-shadow: $shadow;
+        transition: .3s ease;
+
+        &:hover {
+            box-shadow: 0px 12px 12px 0px #68b6c723;
+
+            & .title {
+                color: $darkBlue;
+            }
+        }
 
         @include mobile {
             max-width: 100%;
@@ -1184,9 +1332,10 @@ main {
         }
 
         & .title {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 500;
             line-height: normal;
+            transition: .3s ease;
         }
 
         & .btn {
@@ -1210,6 +1359,7 @@ main {
 
 .mainGoods {
     background: $main;
+    padding-bottom: 4rem;
 
     & .wrap {
         max-width: 136rem;
@@ -1219,6 +1369,7 @@ main {
 
     & .swiper-wrapper {
         align-items: stretch;
+        padding-bottom: 2rem;
 
         @include mobile {
             flex-wrap: wrap;
@@ -1275,8 +1426,8 @@ main {
             }
 
             & .title {
-                font-size: 1.8rem;
-                font-weight: 700;
+                font-size: 1.5rem;
+                font-weight: 500;
                 line-height: normal;
             }
 
@@ -1414,6 +1565,8 @@ main {
 
             & .img {
                 max-height: 18rem;
+                overflow: hidden;
+                object-fit: contain;
             }
 
             & .title {
@@ -1757,8 +1910,17 @@ main {
         }
     }
 
-    & .copyright,
     & .policy {
+        font-size: 1.1rem;
+        text-decoration: underline;
+        transition: .3s ease;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+
+    & .copyright {
         font-size: 1.3rem;
     }
 }
@@ -1793,7 +1955,7 @@ main {
 
         & .pattern_002 {
             position: absolute;
-            top: -2%;
+            top: 0rem;
             right: 2%;
             width: 37rem;
             z-index: 30;
@@ -1801,11 +1963,11 @@ main {
     }
 
     & p {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     & h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: bold;
     }
 
@@ -2035,8 +2197,83 @@ section.card {
         }
     }
 
+    & .tabs {
+        background: $white;
+        padding: 1rem;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+
+        & .tab {
+            padding: 1.1rem 2.2rem;
+            border-radius: 10rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            background: transparent;
+
+            &.active {
+                color: $white;
+                background: $darkBlue;
+            }
+        }
+
+        & .tabContent {
+            display: none;
+
+            &.active {
+                display: flex;
+            }
+
+            & ol.list {
+                list-style-type: none;
+                color: $black;
+                display: block;
+                counter-reset: item;
+                padding-left: 0rem;
+
+                & .item {
+                    list-style-position: inside;
+                    counter-increment: item;
+
+                    &::before {
+                        content: counter(item) ".";
+                        flex: 0 0 auto;
+                    }
+
+                    & p {
+                        font-size: 1.3rem;
+                    }
+
+                    & .number {
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            & .row {
+                padding: 1.1rem 2rem;
+                border-top: 1px solid #68B5C72B;
+
+                &.legend {
+                    padding: 1.25rem 2rem;
+
+                    & p {
+                        font-size: 1.1rem;
+                    }
+                }
+
+
+
+
+            }
+        }
+    }
+
     & .description p {
         font-size: 1.5rem;
+    }
+
+    & .article span {
+        font-size: 1.3rem;
     }
 
     & .download {
@@ -2105,8 +2342,51 @@ section.info {
     }
 }
 
-section.news {
-    padding-bottom: 0rem;
+section.news, section.sales {
+    // padding-bottom: 0rem;
+    background: $main;
+
+    & .content {
+        & a.item {
+            max-width: 38rem;
+            width: 100%;
+            box-shadow: $shadow;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: $white;
+
+            &:hover {
+                & .text {
+                    & .title {
+                        color: $darkBlue;
+                    }
+                }
+            }
+
+            & .img {
+                max-height: 18rem;
+                overflow: hidden;
+                object-fit: contain;
+            }
+
+            & .text {
+                padding: 2rem;
+
+                & .date {
+                    font-size: 1.5rem;
+                    color: $lightBlack;
+                }
+
+                & .title {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    line-height: 2rem;
+                    color: $black;
+                    transition: .3s ease;
+                }
+            }
+        }
+    }
 
     & .column {
         max-width: 25%;
@@ -2156,9 +2436,10 @@ section.news {
         & .overall {
             margin-left: auto;
 
-            & .amount {
+            & .amount,
+            & .sum {
                 font-size: 3.2rem;
-                font-weight: 800;
+                font-weight: 700;
 
                 & .woocommerce-Price-currencySymbol {
                     font-weight: normal;
@@ -2211,6 +2492,7 @@ section.news {
             max-width: 50rem;
             font-size: 1.8rem;
             font-weight: 700;
+            line-height: 2rem;
         }
 
         & .old {
@@ -2260,18 +2542,19 @@ section.news {
 
 
 .checkout,
-.account {
+.account,
+section.invoice {
     & .disclaimer {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     & .checkoutForm {
         & h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         & .label {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         & .row {
@@ -2479,6 +2762,10 @@ section.news {
                 cursor: pointer;
 
                 & .top {
+                    & .number {
+                        font-weight: 600;
+                    }
+
                     & .date {
                         color: $lightBlack;
                     }
@@ -2624,5 +2911,128 @@ section.news {
                 margin-top: 4rem;
             }
         }
+    }
+}
+
+section.notfound {
+    background: url(../img/404.png) no-repeat top center /contain;
+
+    & .container {
+        min-height: 80vh;
+    }
+
+    & h2 {
+        margin-top: 10%;
+    }
+
+    & a {
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 1.8rem 2.4rem;
+        border-radius: 10rem;
+        color: $white;
+        background: $red;
+        transition: .3s ease;
+
+        &:hover {
+            background: $redHover;
+        }
+    }
+}
+
+section.thankyou {
+    & h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    & .list {
+        & .legend {
+            min-width: 12rem;
+            text-align: right;
+        }
+
+        & .value {
+            width: fit-content;
+        }
+    }
+
+    & .controls {
+        & .btn {
+            padding: 1.8rem 2.4rem;
+            border-radius: 10rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s ease;
+
+            &.toAccount {
+                background: $black;
+                color: $white;
+
+                & svg {
+                    fill: $white;
+                }
+            }
+
+            &.toMain {
+                background: $lightBlue;
+                color: $lightBlack;
+
+                & svg {
+                    fill: $lightBlack;
+                }
+            }
+
+            & svg {
+                transition: .3s ease;
+            }
+
+            &:hover {
+                background: $white;
+                color: $lightBlack;
+
+                & svg {
+                    fill: $lightBlack;
+                }
+            }
+
+        }
+    }
+}
+
+section.policy {
+    position: relative;
+    z-index: 5;
+
+    & p:has(b),
+    p:has(strong) {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    b,
+    strong {
+        font-weight: 700;
+    }
+
+    & ul {
+        margin: 0.5rem 0;
+    }
+}
+
+.singleNews {
+    & .img {
+        max-width: 30%;
+        width: 100%;
+        @include mobile {
+            max-width: 100%;
+        }
+    }
+    & .date {
+        font-size: 1.1rem;
+        color: $darkBlue;
+        font-weight: 600;
     }
 }

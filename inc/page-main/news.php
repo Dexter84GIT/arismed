@@ -11,69 +11,48 @@
                 <div class="container df fdc gap30">
                     <div class="top df aic jcsb">
                         <h2 class="sectionTitle druk">Новости</h2>
-                        <a href="#" class="link druk">Все новости</a>
+                        <a href="/news" class="link druk">Все новости</a>
                     </div>
                     <div class="content swiper slider slider3 newsSlider">
                         <div class="swiper-wrapper">
-                            <a href="#" class="swiper-slide slide df fdc">
-                                <div class="img">
-                                    <img src="<?php bloginfo('template_directory'); ?>/img/news.png" alt="news">
-                                </div>
-                                <div class="text df fdc gap20">
-                                    <p class="date">15.11.25</p>
-                                    <p class="title druk">III Тихоокеанская олимпиада по первой помощи «Спасая жизни —
-                                        мы
-                                        помним героев!»</p>
-                                </div>
-                            </a>
-                            <a href="#" class="swiper-slide slide df fdc">
-                                <div class="img">
-                                    <img src="<?php bloginfo('template_directory'); ?>/img/news.png" alt="news">
-                                </div>
-                                <div class="text df fdc gap20">
-                                    <p class="date">15.11.25</p>
-                                    <p class="title druk">
-                                        24-й Всероссийский научно-практический конгресс с международным участием «Скорая
-                                        медицинская помощь-2025»
-                                    </p>
-                                </div>
-                            </a>
-                            <a href="#" class="swiper-slide slide df fdc">
-                                <div class="img">
-                                    <img src="<?php bloginfo('template_directory'); ?>/img/news.png" alt="news">
-                                </div>
-                                <div class="text df fdc gap20">
-                                    <p class="date">15.11.25</p>
-                                    <p class="title druk">
-                                        24-й Всероссийский научно-практический конгресс с международным участием «Скорая
-                                        медицинская помощь-2025»
-                                    </p>
-                                </div>
-                            </a>
-                            <a href="#" class="swiper-slide slide df fdc">
-                                <div class="img">
-                                    <img src="<?php bloginfo('template_directory'); ?>/img/news.png" alt="news">
-                                </div>
-                                <div class="text df fdc gap20">
-                                    <p class="date">15.11.25</p>
-                                    <p class="title druk">
-                                        24-й Всероссийский научно-практический конгресс с международным участием «Скорая
-                                        медицинская помощь-2025»
-                                    </p>
-                                </div>
-                            </a>
-                            <a href="#" class="swiper-slide slide df fdc">
-                                <div class="img">
-                                    <img src="<?php bloginfo('template_directory'); ?>/img/news.png" alt="news">
-                                </div>
-                                <div class="text df fdc gap20">
-                                    <p class="date">15.11.25</p>
-                                    <p class="title druk">
-                                        24-й Всероссийский научно-практический конгресс с международным участием «Скорая
-                                        медицинская помощь-2025»
-                                    </p>
-                                </div>
-                            </a>
+                            <?php
+                            $q = new WP_Query([
+                                'post_type' => 'company_news',
+                                'post_status' => 'publish',
+                                'posts_per_page' => -99,
+                                'no_found_rows' => true,
+                                'ignore_sticky_posts' => true,
+                                'tax_query' => [
+                                    [
+                                        'taxonomy' => 'product_visibility',
+                                        'field' => 'name',
+                                        'terms' => ['exclude-from-catalog'],
+                                        'operator' => 'NOT IN',
+                                    ],
+                                ],
+                            ]);
+
+                            if ($q->have_posts()) :
+                                while ($q->have_posts()) : $q->the_post();
+
+                                $image = get_field('image'); 
+
+                                ?>
+                            
+                                <a href="<?php the_permalink(); ?>" class="swiper-slide slide df fdc">
+                                    <div class="img">
+                                        <img src="<?php echo esc_url($image); ?>" alt="news">
+                                    </div>
+                                    <div class="text df fdc gap20">
+                                        <p class="date"><?php echo get_the_date('n-j-Y'); ?></p>
+                                        <p class="title druk"><?php the_title();?></p>
+                                    </div>
+                                </a>
+                            <?php
+                                endwhile;
+                                wp_reset_postdata();
+                            endif;
+                            ?>
                         </div>
                         <div class="swiper-button-prev controlBtn prev">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"

@@ -42,7 +42,7 @@ if (!$term_id) {
 
             $price_html = $product->get_price_html();
             ?>
-            <div class="item">
+            <div class="item df fdc gap20 jcsb">
                 <div class="top df fdc gap20">
                     <a class="img" href="<?php echo esc_url($link_url); ?>">
                         <?php echo $img; ?>

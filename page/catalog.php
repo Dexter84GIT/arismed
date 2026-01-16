@@ -10,10 +10,10 @@ $is_cat = function_exists('is_product_category') && is_product_category();
 <section class="pageCatalog catalog section mainGoods">
     <div class="container df fdc gap30">
         <?php
-        if ($is_shop) {
-            include get_template_directory() . '/inc/page-catalog/catalog.php';
-        } elseif ($is_cat) {
+        if ($is_cat) {
             include get_template_directory() . '/inc/page-catalog/category.php';
+        } else {
+            include get_template_directory() . '/inc/page-catalog/catalog.php';
         }
         ?>
     </div>

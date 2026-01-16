@@ -7,6 +7,7 @@
         ?>
             <div class="swiper-slide slide" data-full="<?php echo esc_url($full ?: ''); ?>">
                 <?php echo $img; ?>
+                <meta itemprop="image" content="<?php echo esc_url($full); ?>">
             </div>
         <?php endforeach; ?>
     </div>

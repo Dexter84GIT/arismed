@@ -8,13 +8,13 @@
         </svg>
         Заказы
     </p>
-    <p class="btn tab df aic gap10 druk">
+    <!-- <p class="btn tab df aic gap10 druk">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M6 12H12V13.5H6V12ZM6 9H12V10.5H6V9ZM10.5 1.5H4.5C3.675 1.5 3 2.175 3 3V15C3 15.825 3.6675 16.5 4.4925 16.5H13.5C14.325 16.5 15 15.825 15 15V6L10.5 1.5ZM13.5 15H4.5V3H9.75V6.75H13.5V15Z" />
         </svg>
         Документы
-    </p>
+    </p> -->
     <p class="btn tab df aic gap10 druk">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -35,11 +35,11 @@
         </svg>
         Личные данные
     </p>
-    <p class="btn logout df aic gap10 druk">
+    <a href="<?php echo esc_url( wp_logout_url( home_url('/') ) ); ?>"
+       class="btn logout df aic gap10 druk">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M12.75 6L11.6925 7.0575L12.8775 8.25H6.75V9.75H12.8775L11.6925 10.935L12.75 12L15.75 9L12.75 6ZM3.75 3.75H9V2.25H3.75C2.925 2.25 2.25 2.925 2.25 3.75V14.25C2.25 15.075 2.925 15.75 3.75 15.75H9V14.25H3.75V3.75Z" />
+            <path d="M12.75 6L11.6925 7.0575L12.8775 8.25H6.75V9.75H12.8775L11.6925 10.935L12.75 12L15.75 9L12.75 6ZM3.75 3.75H9V2.25H3.75C2.925 2.25 2.25 2.925 2.25 3.75V14.25C2.25 15.075 2.925 15.75 3.75 15.75H9V14.25H3.75V3.75Z"/>
         </svg>
         Выйти
-    </p>
+    </a>
 </div>

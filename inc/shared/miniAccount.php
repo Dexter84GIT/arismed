@@ -1,3 +1,15 @@
+<?php
+defined('ABSPATH') || exit;
+
+$user_id = get_current_user_id();
+$is_logged_in = $user_id > 0;
+
+$account_url = home_url('/account/');
+$register_url = home_url('/registration/');
+$login_url = home_url('/login/');
+
+?>
+
 <div class="miniAccountBtn dropBtn">
     <p class="iconLink tpr ">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -9,6 +21,7 @@
     <div class="miniAccount drop df fdc gap30">
         <h3 class="druk">Мой аккаунт</h3>
         <div class="links df fdc gap10">
+            <?php if ($is_logged_in): ?>
             <a href="/account" class="link df aic gap10">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +62,7 @@
                 </svg>
                 <p class="druk">Личные данные</p>
             </a>
-            <a href="#" class="link logout df aic gap10">
+            <a href="<?php echo esc_url( wp_logout_url( home_url('/') ) ); ?>" class="link logout df aic gap10">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -57,6 +70,36 @@
                 </svg>
                 <p class="druk">Выйти</p>
             </a>
+            <?php else: ?>
+            <a href="/registration" class="link df aic gap10">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 9H10.5V10.125H13.5V9Z" />
+                    <path d="M13.5 11.25H10.5V12.375H13.5V11.25Z" />
+                    <path
+                        d="M15 5.25H11.25V3C11.25 2.175 10.575 1.5 9.75 1.5H8.25C7.425 1.5 6.75 2.175 6.75 3V5.25H3C2.175 5.25 1.5 5.925 1.5 6.75V15C1.5 15.825 2.175 16.5 3 16.5H15C15.825 16.5 16.5 15.825 16.5 15V6.75C16.5 5.925 15.825 5.25 15 5.25ZM8.25 5.25V3H9.75V5.25V6.75H8.25V5.25ZM15 15H3V6.75H6.75C6.75 7.575 7.425 8.25 8.25 8.25H9.75C10.575 8.25 11.25 7.575 11.25 6.75H15V15Z" />
+                    <path
+                        d="M6.75 11.25C7.37132 11.25 7.875 10.7463 7.875 10.125C7.875 9.50368 7.37132 9 6.75 9C6.12868 9 5.625 9.50368 5.625 10.125C5.625 10.7463 6.12868 11.25 6.75 11.25Z" />
+                    <path
+                        d="M8.31 12.135C7.83 11.925 7.305 11.8125 6.75 11.8125C6.195 11.8125 5.67 11.925 5.19 12.135C4.77 12.315 4.5 12.72 4.5 13.1775V13.5H9V13.1775C9 12.72 8.73 12.315 8.31 12.135Z" />
+                </svg>
+                <p class="druk">Зарегистрироваться</p>
+            </a>
+            <a href="/login" class="link df aic gap10">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 9H10.5V10.125H13.5V9Z" />
+                    <path d="M13.5 11.25H10.5V12.375H13.5V11.25Z" />
+                    <path
+                        d="M15 5.25H11.25V3C11.25 2.175 10.575 1.5 9.75 1.5H8.25C7.425 1.5 6.75 2.175 6.75 3V5.25H3C2.175 5.25 1.5 5.925 1.5 6.75V15C1.5 15.825 2.175 16.5 3 16.5H15C15.825 16.5 16.5 15.825 16.5 15V6.75C16.5 5.925 15.825 5.25 15 5.25ZM8.25 5.25V3H9.75V5.25V6.75H8.25V5.25ZM15 15H3V6.75H6.75C6.75 7.575 7.425 8.25 8.25 8.25H9.75C10.575 8.25 11.25 7.575 11.25 6.75H15V15Z" />
+                    <path
+                        d="M6.75 11.25C7.37132 11.25 7.875 10.7463 7.875 10.125C7.875 9.50368 7.37132 9 6.75 9C6.12868 9 5.625 9.50368 5.625 10.125C5.625 10.7463 6.12868 11.25 6.75 11.25Z" />
+                    <path
+                        d="M8.31 12.135C7.83 11.925 7.305 11.8125 6.75 11.8125C6.195 11.8125 5.67 11.925 5.19 12.135C4.77 12.315 4.5 12.72 4.5 13.1775V13.5H9V13.1775C9 12.72 8.73 12.315 8.31 12.135Z" />
+                </svg>
+                <p class="druk">Войти</p>
+            </a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
