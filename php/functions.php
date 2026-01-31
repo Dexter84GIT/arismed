@@ -474,19 +474,6 @@ add_action('init', function () {
     remove_post_type_support('product', 'excerpt');
 });
 
-// своя страница магазина и категории
-
-// add_filter('template_include', function ($template) {
-//     if (
-//         function_exists('is_shop') && is_shop() ||
-//         function_exists('is_product_category') && is_product_category()
-//     ) {
-//         $t = get_stylesheet_directory() . '/page/catalog.php';
-//         if (file_exists($t)) return $t;
-//     }
-//     return $template;
-// }, 999);
-
 // перенаправление ссылок для каталога
 
 $catalog_links = get_template_directory() . '/functions/breadcrumbs_links.php';
@@ -534,6 +521,48 @@ if (file_exists($getLogin)) {
 $headerSearch = get_template_directory() . '/functions/header_search.php';
 if (file_exists($headerSearch)) {
     require_once $headerSearch;
+}
+
+// поиск в документах
+
+$docsSearch = get_template_directory() . '/functions/docs_search.php';
+if (file_exists($docsSearch)) {
+    require_once $docsSearch;
+}
+
+// симуляция платежа
+
+$fakePay = get_template_directory() . '/functions/checkout_submit.php';
+if (file_exists($fakePay)) {
+    require_once $fakePay;
+}
+
+// проверка полей пользователя на чекауте
+
+$checkoutUserFields = get_template_directory() . '/functions/checkout_user_fields.php';
+if (file_exists($checkoutUserFields)) {
+    require_once $checkoutUserFields;
+}
+
+// парсинг сохраненных адресов
+
+$checkoutAdress = get_template_directory() . '/functions/checkout_adress.php';
+if (file_exists($checkoutAdress)) {
+    require_once $checkoutAdress;
+}
+
+// сохранение адресов в мету
+
+$accountAddAdress = get_template_directory() . '/functions/account_add_adress.php';
+if (file_exists($accountAddAdress)) {
+    require_once $accountAddAdress;
+}
+
+// удаление адреса из меты
+
+$accountDeleteAdress = get_template_directory() . '/functions/account_delete_adress.php';
+if (file_exists($accountDeleteAdress)) {
+    require_once $accountDeleteAdress;
 }
 
 // принудительно переключаем шаблон категорий

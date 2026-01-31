@@ -22,7 +22,7 @@ if ($gallery_ids) {
 ?> 
         <section class="card productCard section" itemscope itemtype="https://schema.org/Product">
             <div class="container df fdc gap30">
-                <h2 class="sectionTitle druk" itemprop="name"><?php the_title(); ?></h2>
+                <h1 class="sectionTitle druk" itemprop="name"><?php the_title(); ?></h1>
                 <div class="content df fdc gap30">
                     <div class="block info df aifs gap30">
                         <div class="column df fdc gap30">

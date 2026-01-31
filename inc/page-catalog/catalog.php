@@ -1,5 +1,5 @@
         <h2 class="sectionTitle druk">Каталог</h2> 
-              <div class="content df fww ais gap20">
+              <div class="content df fww ais gap20 catalog">
                 <?php
                 $cats = get_terms([
                     'taxonomy' => 'product_cat',

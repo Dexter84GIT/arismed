@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-    <script>
-        window.ARISMED_METRIKA_ID = 12345678;
-    </script>
+    <?php include get_template_directory() . '/inc/shared/metrica.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="yandex-verification" content="fb70cec6ae67d084" />
@@ -15,7 +13,7 @@
 
 <?php include get_template_directory() . '/inc/shared/cookie.php'; ?>
 
-<body class="page" itemscope itemtype="https://schema.org/WebPage">
+<body <?php body_class("page"); ?> itemscope itemtype="https://schema.org/WebPage">
     <main>
         <div class="topPatterns bg">
             <div class="pattern_001 desktop">
@@ -34,8 +32,11 @@
                     <div class="openMenu mobile">
                         <span></span>
                     </div>
-                    <a href="/" class="logo">
+                    <a href="/" class="logo desktop">
                         <img src="<?php bloginfo('template_directory'); ?>/img/logo_blue.svg" alt="logo">
+                    </a>
+                    <a href="/" class="logo mobile">
+                        <img src="<?php bloginfo('template_directory'); ?>/img/logo_white.svg" alt="logo">
                     </a>
                     <div class="info df aic gap60">
                         <a href="mailto:arismed@arismed.ru" target="_blank" class="phone df aic gap15">

@@ -60,12 +60,12 @@
                                         <?php echo wp_kses_post($price_html); ?>
                                     </p>
                                     <meta itemprop="priceCurrency" content="RUB">
-                                    <a
-                                      href="#"
+                                    <button
+                                      type="button"
                                       class="btn ajaxAddToCart"
                                       data-product_id="<?php echo esc_attr($product->get_id()); ?>"
                                       data-qty="1"
-                                    >В корзину</a>
+                                    >В корзину</button>
                                     <link itemprop="availability" href="http://schema.org/InStock">
                                 </div>
                             </div>
@@ -87,7 +87,6 @@
                                 <path d="M8 0L9.41 1.41L3.83 7H16V9H3.83L9.41 14.59L8 16L0 8L8 0Z" />
                             </svg>
                         </div>
-                        <a href="/goods" class="seeMore mobile">Все товары</a>
                     </div>
                 </div>
             </div>

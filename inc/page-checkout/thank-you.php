@@ -3,18 +3,26 @@
 * @var WC_Order $order
 */
 defined( 'ABSPATH' ) || exit;
-if ( ! $order instanceof WC_Order ) return;
+
+$order_id = isset($_GET['order_id']) ? absint($_GET['order_id']) : 0;
+$key      = isset($_GET['key']) ? wc_clean(wp_unslash($_GET['key'])) : '';
+
+$order = $order_id ? wc_get_order($order_id) : false;
+
+if ( ! $order || ! $key || $order->get_order_key() !== $key ) {
+  echo '<section class="thankyou section">
+    <div class="container">
+      <h2 class="sectionTitle">Заказ не найден</h2>
+    </div>
+  </section>';
+  return;
+}
 ?>
 
 <section class="thankyou section">
     <div class="container df fdc gap60">
         <div class="block df fdc gap20">
             <h2 class="sectionTitle">Спасибо! Заказ оформлен!</h2>
-            <p>Надежность и качество продукции. Используем проверенные комплектующие, следим за сроками годности
-                и соответствием номенклатуры требованиям приказов. Предоставляем спецификацию и комплект
-                сопроводительной документации по запросу.</p>
-            <p>Минимальные сроки отгрузки. Оперативно формируем и отправляем заказы благодаря налаженной
-                логистике и складскому запасу.</p>
         </div>
 
         <div class="block details df fdc gap20">
@@ -36,11 +44,15 @@ if ( ! $order instanceof WC_Order ) return;
                 <p class="value"><?php echo esc_html( $order->get_billing_email() ); ?></p>
               </div>
             <?php endif; ?>
-            
-            <?php if ( is_user_logged_in() && (int) $order->get_user_id() === (int) get_current_user_id() && $order->get_billing_name() ) : ?>
+
+            <?php
+              $billing_name = trim($order->get_billing_first_name() . ' ' . $order->get_billing_last_name());
+            ?>
+
+            <?php if ( is_user_logged_in() && (int) $order->get_user_id() === (int) get_current_user_id() && $billing_name ) : ?>
               <div class="row df aic gap30">
                 <p class="legend">ФИО:</p>
-                <p class="value"><?php echo esc_html( $order->get_billing_name() ); ?></p>
+                <p class="value"><?php echo esc_html($billing_name); ?></p>
               </div>
             <?php endif; ?>
             

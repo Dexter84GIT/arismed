@@ -12,13 +12,13 @@
                         <div class="link">
                             <img src="<?php bloginfo('template_directory'); ?>/img/znak.svg" alt="chestnyznak">
                         </div>
-                        <div class="link">
+                        <a href="https://zakupki.mos.ru/companyProfile/31868198" class="link" target="_blank">
                             <img src="<?php bloginfo('template_directory'); ?>/img/portal.svg" alt="portal">
-                        </div>
+                        </a>
                     </div>
                     <h1 class="mainTitle druk">Производство медицинских аптечек и укладок</h1>
                     <p class="subtitle">Комплектация медицинских наборов и укладок по приказам МЗ РФ</p>
-                    <a href="/catalog" class="primaryBtn druk">Смотреть каталог</a>
+                    <a href="/shop" class="primaryBtn druk">Смотреть каталог</a>
                 </div>
                 <div class="block img">
                     <img src="<?php bloginfo('template_directory'); ?>/img/hero_bg_doctor.png" alt="doctor">

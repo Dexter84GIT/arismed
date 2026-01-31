@@ -1,8 +1,15 @@
 <?php 
 
-add_action('woocommerce_save_account_details', function ($user_id) {
-    if (!$user_id) return;
+add_action('woocommerce_save_account_details', 'arismed_save_extra_account_fields', 10, 1);
 
-    $phone = isset($_POST['billing_phone']) ? wc_clean(wp_unslash($_POST['billing_phone'])) : '';
-    update_user_meta($user_id, 'billing_phone', $phone);
-}, 20);
+function arismed_save_extra_account_fields($user_id) {
+  if ( ! $user_id ) return;
+
+  if ( isset($_POST['billing_phone']) ) {
+    update_user_meta(
+      $user_id,
+      'billing_phone',
+      sanitize_text_field(wp_unslash($_POST['billing_phone']))
+    );
+  }
+}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include get_template_directory() . '/inc/shared/metrica.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="yandex-verification" content="fb70cec6ae67d084" />
@@ -11,7 +12,7 @@
 
 <?php include get_template_directory() . '/inc/shared/cookie.php'; ?>
 
-<body class="page-main" itemscope itemtype="https://schema.org/WebPage">
+<body class="page-main <?php body_class(); ?>" itemscope itemtype="https://schema.org/WebPage">
     <main>
         <?php include get_template_directory() . '/inc/shared/mobile-menu.php'; ?>
         <?php include get_template_directory() . '/inc/shared/added.php'; ?>

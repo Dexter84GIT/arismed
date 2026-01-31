@@ -25,7 +25,7 @@
                     $q = new WP_Query([
                         'post_type' => 'company_docs',
                         'post_status' => 'publish',
-                        'posts_per_page' => -1,
+                        'posts_per_page' => -99,
                         'orderby' => 'title',
                         'order' => 'ASC',
                     ]);

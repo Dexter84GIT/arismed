@@ -35,7 +35,7 @@
             
                 $orders = wc_get_orders([
                     'customer_id' => $customer_id,
-                    'limit'       => 20,
+                    'limit'       => -99,
                     'orderby'     => 'date',
                     'order'       => 'DESC',
                     'status'      => array_keys(wc_get_order_statuses()),
@@ -77,7 +77,10 @@
                     
                         $items = $order->get_items();
                         ?>
-                        <div class="item df fdc">
+                        <div class="item df fdc"
+                            data-order-id="<?php echo esc_attr($order_id); ?>"
+                            data-status="<?php echo esc_attr($badge_class); ?>"
+                            data-paid="<?php echo $is_paid ? '1' : '0'; ?>">
                             <div class="top df aic gap20">
                                 <p class="number druk">Заказ №<?php echo esc_html($order_id); ?></p>
                                 <p class="date df aic gap5">

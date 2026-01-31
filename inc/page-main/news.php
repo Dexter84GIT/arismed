@@ -10,8 +10,8 @@
             <div class="wrap">
                 <div class="container df fdc gap30">
                     <div class="top df aic jcsb">
-                        <h2 class="sectionTitle druk">Новости</h2>
-                        <a href="/news" class="link druk">Все новости</a>
+                        <h2 class="sectionTitle druk">Информация</h2>
+                        <a href="/news" class="link druk">Все записи</a>
                     </div>
                     <div class="content swiper slider slider3 newsSlider">
                         <div class="swiper-wrapper">

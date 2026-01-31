@@ -5,7 +5,7 @@
                         <img src="<?php bloginfo('template_directory'); ?>/img/logo_full.svg" alt="logo">
                     </a>
                     <div class="links df aic gap60">
-                        <a href="#" class="phone df aic gap15">
+                        <a href="tel:+79061007277" class="phone df aic gap15">
                             <div class="img link df aic jcc">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@
                                         fill="white" />
                                 </svg>
                             </div>
-                            <p class="druk">8 (963) 900-42-08</p>
+                            <p class="druk">+7 (906) 100-72-77</p>
                         </a>
                         <div class="social df aic gap20">
                             <a href="https://t.me/aris_med" class="link df aic jcc" target="_blank">
@@ -42,23 +42,23 @@
                     </div>
                 </div>
                 <div class="block menu df aic gap10">
-                    <a href="#" class="link druk">Каталог</a>
-                    <a href="#" class="link druk">Компания</a>
-                    <a href="#" class="link druk">Документы</a>
-                    <a href="#" class="link druk">Оплата и доставка</a>
-                    <a href="#" class="link druk">Акции</a>
-                    <a href="#" class="link druk">Новости</a>
-                    <a href="#" class="link druk">Контакты</a>
+                    <a href="/shop" class="link druk">Каталог</a>
+                    <a href="/about" class="link druk">Компания</a>
+                    <a href="/docs" class="link druk">Документы</a>
+                    <a href="/delivery" class="link druk">Оплата и доставка</a>
+                    <a href="/sales" class="link druk">Акции</a>
+                    <a href="/news" class="link druk">Новости</a>
+                    <a href="/contacts" class="link druk">Контакты</a>
                 </div>
                 <div class="df fdc gap30">
                     <p class="disclaimer">Вся информация, представленная на сайте, включая цены, фотографии, наличие товаров и иные параметры, носит ознакомительный характер и не является публичной офертой.</p>
-                    <div class="block df aic gap60">
+                    <div class="block df aic gap60 policies">
                         <a href="/policy-privacy-data" class="policy">Политика обработки персональных данных</a>
                         <a href="/policy-cookies" class="policy">Политика использования файлов cookies</a>
                         <a href="/publichnaya-oferta" class="policy">Публичная оферта</a>
                     </div>
                     <div class="block df aic jcsb">
-                        <p class="copyright">2014 - 2025 © АРИСМЕД / Фармацевтическая лицензия № ЛО-18-02-000535 от 21 августа 2014 г.</p>
+                        <p class="copyright">2014 - <?php echo date('Y');?> © АРИСМЕД / Фармацевтическая лицензия № ЛО-18-02-000535 от 21 августа 2014 г.</p>
                     </div>
                 </div>
             </div>

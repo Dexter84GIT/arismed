@@ -1,65 +1,66 @@
 <?php 
 $file = get_field('file');
 ?>
-<section class="news info section df fdc gap60">
+<section class="contacts section df fdc gap60">
             <div class="container df fdc gap60">
                 <h2 class="sectionTitle druk">Контакты</h2>
                 <div class="content df ais gap60">
-                    <div class="column df fdc gap15">
-                        <div class="top df aifs gap15">
-                            <div class="icon">
-                                <svg width="16" height="20" viewBox="0 0 16 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" />
-                                </svg>
-
-                            </div>
-                            <p class="druk">г. Новороссийск, ул. Кутузовская, 117</p>
+                    <div class="column df gap15">
+                        <div class="icon">
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" />
+                            </svg>
                         </div>
-                        <div class="bottom">
-                            <p>353917</p>
-                            <p>Краснодарский край</p>
+                        <div class="block df fdc gap15">
+                            <div class="top df aifs gap15">
+                                <p class="druk">г. Новороссийск, ул. Кутузовская, 117</p>
+                            </div>
+                            <div class="bottom">
+                                <p>353917</p>
+                                <p>Краснодарский край</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="column df fdc gap15">
-                        <div class="top df aifs gap15">
-                            <div class="icon">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M3.54 2C3.6 2.89 3.75 3.76 3.99 4.59L2.79 5.79C2.38 4.59 2.12 3.32 2.03 2H3.54ZM13.4 14.02C14.25 14.26 15.12 14.41 16 14.47V15.96C14.68 15.87 13.41 15.61 12.2 15.21L13.4 14.02ZM4.5 0H1C0.45 0 0 0.45 0 1C0 10.39 7.61 18 17 18C17.55 18 18 17.55 18 17V13.51C18 12.96 17.55 12.51 17 12.51C15.76 12.51 14.55 12.31 13.43 11.94C13.33 11.9 13.22 11.89 13.12 11.89C12.86 11.89 12.61 11.99 12.41 12.18L10.21 14.38C7.38 12.93 5.06 10.62 3.62 7.79L5.82 5.59C6.1 5.31 6.18 4.92 6.07 4.57C5.7 3.45 5.5 2.25 5.5 1C5.5 0.45 5.05 0 4.5 0Z" />
-                                </svg>
-
-                            </div>
-                            <div class="block df fdc">
+                    <div class="column df gap15">
+                        <div class="icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.54 2C3.6 2.89 3.75 3.76 3.99 4.59L2.79 5.79C2.38 4.59 2.12 3.32 2.03 2H3.54ZM13.4 14.02C14.25 14.26 15.12 14.41 16 14.47V15.96C14.68 15.87 13.41 15.61 12.2 15.21L13.4 14.02ZM4.5 0H1C0.45 0 0 0.45 0 1C0 10.39 7.61 18 17 18C17.55 18 18 17.55 18 17V13.51C18 12.96 17.55 12.51 17 12.51C15.76 12.51 14.55 12.31 13.43 11.94C13.33 11.9 13.22 11.89 13.12 11.89C12.86 11.89 12.61 11.99 12.41 12.18L10.21 14.38C7.38 12.93 5.06 10.62 3.62 7.79L5.82 5.59C6.1 5.31 6.18 4.92 6.07 4.57C5.7 3.45 5.5 2.25 5.5 1C5.5 0.45 5.05 0 4.5 0Z" />
+                            </svg>
+                        </div>
+                        <div class="block df fdc aifs gap15">
+                            <div class="top df fdc">
                                 <a href="tel:89892005557" class="druk">+7 (989) 200-55-57</a>
                                 <a href="tel:89061007277" class="druk">+7 (906) 100-72-77</a>
                             </div>
-                        </div>
-                        <div class="bottom">
-                            <p>Пн. – Пт.: с 9:00 до 18:00</p>
-                            <p>Сб.– Вс.: Выходной</p>
+                            <div class="block df fdc">
+                                <p>Пн. – Пт.: с 9:00 до 18:00</p>
+                                <p>Сб.– Вс.: Выходной</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="column df fdc gap15">
-                        <div class="top df aifs gap15">
-                            <div class="icon">
-                                <svg width="20" height="16" viewBox="0 0 20 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M20 2C20 0.9 19.1 0 18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2ZM18 2L10 6.99L2 2H18ZM18 14H2V4L10 9L18 4V14Z" />
-                                </svg>
-
-                            </div>
-                            <div class="block df fdc">
-                                <a href="mailto:arismed@arismed.ru" class="druk">arismed@arismed.ru</a>
-                                <p>Отдел продаж</p>
-                            </div>
+                    <div class="column df gap15">
+                        <div class="icon">
+                            <svg width="20" height="16" viewBox="0 0 20 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2C20 0.9 19.1 0 18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2ZM18 2L10 6.99L2 2H18ZM18 14H2V4L10 9L18 4V14Z" />
+                            </svg>
                         </div>
-                        <div class="block bottom df fdc">
-                            <a href="mailto:arismed@arismed.ru" class="druk">arismed@arismed.ru</a>
-                            <p>Тендерный отдел</p>
+                        <div class="top df fdc gap15">
+                            <div class="block df fdc gap10">
+                                <div class="link">
+                                    <a href="mailto:arismed@arismed.ru" class="druk">arismed@arismed.ru</a>
+                                    <p>Отдел продаж</p>
+                                </div>
+                                <div class="link">
+                                    <a href="mailto:arismed@arismed.ru" class="druk">info@aris-med.ru </a>
+                                    <p>Тендерный отдел</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
