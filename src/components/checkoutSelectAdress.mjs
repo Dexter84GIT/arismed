@@ -1,99 +1,105 @@
 const checkoutAddresses = () => {
-  const form = document.getElementById("checkoutForm");
+  const form = document.getElementById('checkoutForm');
   if (!form) return;
 
-  const wrap = document.getElementById("savedAddressWrap");
-  const select = document.getElementById("savedAddressSelect");
+  const wrap   = document.getElementById('savedAddressWrap');
+  const select = document.getElementById('savedAddressSelect');
   if (!wrap || !select) return;
 
-  const $ = (name) => form.querySelector(`[name="${name}"]`);
+  const getField = (name) => form.querySelector(`[name="${name}"]`);
 
   const fields = {
-    name: $("name"),
-    surname: $("surname"),
-    adress: $("adress"),
-    city: $("city"),
-    state: $("state"),
-    post: $("post"),
-    phone: $("phone"),
-    building: $("building"),
-    entrance: $("entrance"),
-    floor: $("floor"),
-    email: $("email"),
+    name: getField('name'),
+    surname: getField('surname'),
+    adress: getField('adress'),
+    city: getField('city'),
+    state: getField('state'),
+    post: getField('post'),
+    phone: getField('phone'),
+    building: getField('building'),
+    entrance: getField('entrance'),
+    floor: getField('floor'),
+    email: getField('email'),
   };
 
-  const setVal = (el, v) => {
+  const setVal = (el, value) => {
     if (!el) return;
-    el.value = v ?? "";
-    el.dispatchEvent(new Event("input", { bubbles: true }));
-    el.dispatchEvent(new Event("change", { bubbles: true }));
+    el.value = value ?? '';
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
   };
 
   const formatLabel = (a) => {
     const parts = [];
-    const full = [a.first_name, a.last_name].filter(Boolean).join(" ").trim();
-    if (full) parts.push(full);
+    const name = [a.first_name, a.last_name].filter(Boolean).join(' ');
+    if (name) parts.push(name);
     if (a.address_1) parts.push(a.address_1);
-    const cityline = [a.city, a.state, a.postcode].filter(Boolean).join(", ").trim();
-    if (cityline) parts.push(cityline);
-    return parts.join(" — ");
+    const city = [a.city, a.state, a.postcode].filter(Boolean).join(', ');
+    if (city) parts.push(city);
+    return parts.join(' — ');
   };
 
   const applyAddress = (a) => {
     setVal(fields.name, a.first_name);
     setVal(fields.surname, a.last_name);
-
-    setVal(fields.adress, [a.address_1, a.address_2].filter(Boolean).join(" ").trim());
+    setVal(fields.adress, [a.address_1, a.address_2].filter(Boolean).join(' '));
     setVal(fields.city, a.city);
     setVal(fields.state, a.state);
     setVal(fields.post, a.postcode);
-
-    if (a.phone) setVal(fields.phone, a.phone);
-
-    if (a.building !== undefined) setVal(fields.building, a.building);
-    if (a.entrance !== undefined) setVal(fields.entrance, a.entrance);
-    if (a.floor !== undefined) setVal(fields.floor, a.floor);
+    setVal(fields.phone, a.phone);
+    setVal(fields.building, a.building);
+    setVal(fields.entrance, a.entrance);
+    setVal(fields.floor, a.floor);
   };
 
-  const load = async () => {
+  const loadAddresses = async () => {
     try {
       const body = new URLSearchParams();
-      body.set("action", "arismed_get_saved_addresses");
+      body.set('action', 'arismed_get_saved_addresses');
 
-      const res = await fetch(window.ajaxurl || "/wp-admin/admin-ajax.php", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
-        body,
-      });
+      const res = await fetch(
+        window.ajaxurl || '/wp-admin/admin-ajax.php',
+        {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          },
+          body,
+        }
+      );
 
       const json = await res.json();
-      const addresses = json?.success ? (json.data.addresses || []) : [];
+      if (!json?.success || !Array.isArray(json.data?.addresses)) return;
 
+      const addresses = json.data.addresses;
       if (!addresses.length) return;
 
-      select.innerHTML = `<option value="">— Не выбирать —</option>`;
-      addresses.forEach((a, idx) => {
-        const opt = document.createElement("option");
-        opt.value = String(idx);
-        opt.textContent = (a.type === "shipping" ? "Доставка" : "Платёжный") + ": " + formatLabel(a);
+      select.innerHTML = '<option value="">— Не выбирать —</option>';
+
+      addresses.forEach((a, i) => {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent =
+          (a.type === 'shipping' ? 'Доставка' : 'Платёжный') +
+          ': ' +
+          formatLabel(a);
         select.appendChild(opt);
       });
 
-      wrap.style.display = "";
+      wrap.style.display = '';
 
-      select.addEventListener("change", () => {
-        const idx = select.value === "" ? -1 : Number(select.value);
-        if (idx < 0 || !addresses[idx]) return;
+      select.addEventListener('change', () => {
+        const idx = Number(select.value);
+        if (Number.isNaN(idx) || !addresses[idx]) return;
         applyAddress(addresses[idx]);
       });
     } catch (e) {
-      console.log("NO");
-      console.error(e);
+      console.error('checkoutAddresses failed', e);
     }
   };
 
-  load();
+  loadAddresses();
 };
 
 export default checkoutAddresses;

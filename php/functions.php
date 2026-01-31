@@ -530,12 +530,12 @@ if (file_exists($docsSearch)) {
     require_once $docsSearch;
 }
 
-// симуляция платежа
+// реальный платеж
 
-$fakePay = get_template_directory() . '/functions/checkout_submit.php';
-if (file_exists($fakePay)) {
-    require_once $fakePay;
-}
+ $realPay = get_template_directory() . '/functions/checkout_submit.php';
+ if (file_exists($realPay)) {
+     require_once $realPay;
+ }
 
 // проверка полей пользователя на чекауте
 

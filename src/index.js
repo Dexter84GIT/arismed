@@ -7,9 +7,10 @@ import quantity from "./components/quantity";
 import cookiePolicy from "./components/cookiePolicy.mjs";
 import headerSearch from "./components/headerSearch.mjs";
 import initDocsSearch from "./components/docsSearch.mjs";
-import checkout from "./components/checkoutValidate.mjs";
-import initDevPay from "./components/checkoutSubmit.mjs";
+
+// оформление заказа
 import checkoutAddresses from "./components/checkoutSelectAdress.mjs";
+import checkoutToPay from "./components/checkoutToPay.mjs";
 
 // аккаунт
 import accountSortOrders from "./components/accountSortOrders.mjs";
@@ -29,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     quantity();
     headerSearch();
     initDocsSearch();
-    checkout();
-    initDevPay();
+
     checkoutAddresses();
+    checkoutToPay();
 
     // аккаунт
     accountSortOrders('');
