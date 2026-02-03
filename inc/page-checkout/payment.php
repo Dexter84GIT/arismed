@@ -47,7 +47,7 @@ if (empty($session['order_id'])) {
     $order->set_payment_method('yookassa');
     $order->set_payment_method_title('Онлайн-оплата');
 
-    $order->set_status('pending');
+    $order->set_status('on-hold');
     $order->calculate_totals();
     $order->save();
 
@@ -59,6 +59,7 @@ if (empty($session['order_id'])) {
     );
 } else {
     $order = wc_get_order((int) $session['order_id']);
+    $order->update_status('processing'); 
     if (!$order) {
         return;
     }

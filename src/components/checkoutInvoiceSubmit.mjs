@@ -95,6 +95,7 @@ const invoiceSubmit = (container) => {
         }
 
         const fd = new FormData(form);
+        fd.append('intent', new URLSearchParams(window.location.search).get('intent') || '');
 
         try {
             const res = await fetch('/wp-admin/admin-ajax.php?action=arismed_invoice_submit', {

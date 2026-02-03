@@ -70,9 +70,9 @@ function arismed_checkout_prepare()
     $intent = wp_generate_uuid4();
 
     WC()->session->set("arismed_intent_$intent", [
-        'mode' => $payment,              // online | invoice
-        'checkout' => $data,              // данные из чекаута
-        'cart' => $cart_items,            // ЗАФИКСИРОВАННАЯ корзина
+        'mode' => $payment,   
+        'checkout' => $data,  
+        'cart' => $cart_items,      
         'user_id' => is_user_logged_in() ? get_current_user_id() : null,
         'expires' => time() + 15 * MINUTE_IN_SECONDS,
     ]);

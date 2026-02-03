@@ -22,8 +22,7 @@ function arismed_invoice_submit()
         wp_send_json_error(['message' => 'Session unavailable'], 500);
     }
 
-    $intent = sanitize_text_field(wp_unslash($_POST['intent'] ?? ''));
-
+    $intent = sanitize_text_field(wp_unslash($_POST['intent'] ?? $_GET['intent'] ?? ''));
     if (!$intent) {
         wp_send_json_error(['message' => 'Invalid intent'], 400);
     }
@@ -82,12 +81,15 @@ function arismed_invoice_submit()
     $order->set_customer_id($user_id);
     $order->set_payment_method('invoice');
     $order->set_payment_method_title('Счет');
-    $order->set_status('pending');
+    $order->set_status('on-hold');
 
     $order->calculate_totals();
     $order->save();
 
     arismed_inc_invoice_counter($user_id);
+
+    $order->update_status('pending');
+
 
     WC()->session->__unset($session_key);
     WC()->cart->empty_cart();
