@@ -613,6 +613,10 @@ if (file_exists($checkoutInvoice)) {
     require_once $checkoutInvoice;
 }
 
+// метаданные заказа в админке
+
+require_once get_template_directory() . '/functions/admin_metaboxes.php';
+
 // принудительно переключаем шаблон категорий
 
 add_filter('template_include', function ($template) {

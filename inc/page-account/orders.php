@@ -107,7 +107,7 @@
                                     <?php endforeach; ?>
                                 </ul>
                                             
-                                <div class="block df aic jcsb gap40">
+                                <div class="block df aic jcsb gap40 last">
                                     <div class="statuses df aic gap10">
                                         <span class="statusBadge <?php echo esc_attr($badge_class); ?>">
                                             <?php echo esc_html($status_label); ?>

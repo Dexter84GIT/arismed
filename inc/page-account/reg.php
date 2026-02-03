@@ -74,7 +74,7 @@
                     <div class="block agree">
                         <label for="agree" class="df aic gap10 agreeCheck">
                             <input type="checkbox" id="agree" name="agree" value="1" <?php checked(!empty($_POST['agree'])); ?> required>
-                            <p class="df aic gap5">Я согласен на обработку <a href="#"> персональных данных</a></p>
+                            <p>Я согласен на обработку <a href="/policy-privacy"> персональных данных</a></p>
                         </label>
                     </div>
 

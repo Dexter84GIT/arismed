@@ -40,6 +40,8 @@ const invoiceSubmit = (container) => {
     };
 
     const digitsOnly = (input, maxLen) => {
+        if (!input) return;
+
         input.addEventListener('input', () => {
             const cleaned = input.value.replace(/\D+/g, '');
             input.value = maxLen ? cleaned.slice(0, maxLen) : cleaned;
@@ -47,7 +49,7 @@ const invoiceSubmit = (container) => {
     };
 
     digitsOnly(innInput, 10);
-    digitsOnly(kppInput, 9);
+    digitsOnly(kppInput, 9); 
 
     form.addEventListener('change', hideError);
 
@@ -56,7 +58,6 @@ const invoiceSubmit = (container) => {
 
         const organization = orgInput?.value.trim();
         const inn = innInput?.value.trim();
-        const kpp = kppInput?.value.trim();
         const address = addrInput?.value.trim();
 
         let invalid = false;
@@ -73,13 +74,6 @@ const invoiceSubmit = (container) => {
             invalid = true;
         } else {
             setError(innInput, false);
-        }
-
-        if (!/^\d{9}$/.test(kpp)) {
-            setError(kppInput, true);
-            invalid = true;
-        } else {
-            setError(kppInput, false);
         }
 
         if (!address) {

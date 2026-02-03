@@ -445,6 +445,14 @@ span.currency {
     border-radius: 1rem;
     transition: .3s ease;
 
+    @include mobile {
+        max-width: 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        bottom: 1rem;
+        right: inherit;
+    }
+
     &.active {
         display: flex;
         opacity: 1;
@@ -477,6 +485,12 @@ span.currency {
     }
 }
 
+.statusBar {
+    @include mobile {
+        flex-wrap: wrap;
+    }
+}
+
 .statusBadge {
     padding: 0.5rem 1.5rem;
     border-radius: 10rem;
@@ -487,25 +501,49 @@ span.currency {
 
     &.pending {
         background: #2D3A4F;
+
+        @include mobile {
+            order: 1;
+        }
     }
 
     &.complete {
         background: #B1B1B1;
+
+        @include mobile {
+            order: 2;
+        }
     }
 
     &.canceled {
         background: #F27D7D;
+
+        @include mobile {
+            order: 3;
+        }
     }
 
     &.hasPayment {
         background: #4ECEBB;
+
+        @include mobile {
+            order: 5;
+        }
     }
 
     &.hasntPayment {
         background: #C88E8E;
+
+        @include mobile {
+            order: 6;
+        }
     }
 
     &.reset {
+        @include mobile {
+            order: 4;
+        }
+
         background: #EEF5F7;
         width: 2.3rem;
         height: 2.3rem;
@@ -1132,7 +1170,7 @@ main {
 
         @include mobile {
             flex-direction: column;
-            padding-top: 1rem;
+            padding-top: 4rem;
             padding-bottom: 0rem;
             background-position: left bottom;
         }
@@ -2125,7 +2163,7 @@ main {
             border-radius: 1rem;
             padding: 1.6rem 2.4rem;
             position: relative;
-
+            outline: none;
         }
 
         & input {
@@ -3043,13 +3081,18 @@ section.invoice {
             position: relative;
             user-select: none;
             font-size: 1.5rem;
-
+            @include mobile {
+                align-items: flex-start;
+            }
             &::before {
                 content: '';
                 width: 1.4rem;
                 height: 1.4rem;
                 border: 2px solid $darkBlue;
                 border-radius: 2px;
+                @include mobile {
+                    margin-top: 0.5rem;
+                }
             }
 
             &:has(input[type='checkbox']:checked)::after {
@@ -3073,6 +3116,11 @@ section.invoice {
     }
 
     & .controls {
+        @include mobile {
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
         & .btn {
             background: $bg;
             padding: 1rem 1.5rem;
@@ -3084,6 +3132,10 @@ section.invoice {
 
             & svg {
                 fill: $black;
+
+                @include mobile {
+                    display: none;
+                }
             }
 
             &.logout {
@@ -3163,6 +3215,12 @@ section.invoice {
                         color: $lightBlack;
                         position: relative;
 
+                        @include mobile {
+                            align-items: flex-start;
+                            flex-direction: row-reverse;
+                            padding-bottom: 1rem;
+                        }
+
                         &::before {
                             content: '';
                             width: 2px;
@@ -3172,6 +3230,10 @@ section.invoice {
                             left: -1rem;
                             top: 50%;
                             transform: translateY(-50%);
+
+                            @include mobile {
+                                display: none;
+                            }
                         }
 
                         & p {
@@ -3182,6 +3244,10 @@ section.invoice {
                             font-size: 1.3rem;
                             position: relative;
 
+                            @include mobile {
+                                font-weight: bold;
+                            }
+
                             &::before {
                                 content: '';
                                 width: 2px;
@@ -3191,6 +3257,10 @@ section.invoice {
                                 left: -1rem;
                                 top: 50%;
                                 transform: translateY(-50%);
+
+                                @include mobile {
+                                    display: none;
+                                }
                             }
                         }
                     }
@@ -3233,6 +3303,23 @@ section.invoice {
                     height: auto;
                     opacity: 1;
                 }
+
+                & .last {
+                    @include mobile {
+                        flex-direction: column;
+                        gap: 3rem;
+                        align-items: flex-start;
+                    }
+
+                    & .block {
+                        @include mobile {
+                            flex-direction: column;
+                            gap: 3rem;
+                            width: 100%;
+                            align-items: flex-end;
+                        }
+                    }
+                }
             }
         }
 
@@ -3246,6 +3333,12 @@ section.invoice {
             transition: .3s ease;
             width: fit-content;
             margin-left: auto;
+
+            @include mobile {
+                margin-left: 0rem;
+                justify-content: center;
+                width: 100%;
+            }
 
             &:hover {
                 background: $redHover;
@@ -3280,6 +3373,7 @@ section.invoice {
 
             & .edit {
                 cursor: pointer;
+                display: none;
 
                 & svg {
                     fill: $black;
@@ -3304,6 +3398,13 @@ section.invoice {
             display: inline;
             color: $lightBlack;
             text-decoration: underline;
+        }
+    }
+    #registrationForm {
+        & .agreeCheck {
+            & a {
+                display: inline;
+            }
         }
     }
 }
@@ -3346,14 +3447,25 @@ section.thankyou {
         & .legend {
             min-width: 12rem;
             text-align: right;
+            @include mobile {
+                min-width: inherit;
+                font-weight: bold;
+            }
         }
 
         & .value {
             width: fit-content;
+            @include mobile {
+                margin-left: auto;
+            }
         }
     }
 
     & .controls {
+        @include mobile {
+            flex-direction: column;
+            align-items: flex-start;
+        }
         & .btn {
             padding: 1.8rem 2.4rem;
             border-radius: 10rem;
@@ -3361,7 +3473,10 @@ section.thankyou {
             font-weight: 700;
             cursor: pointer;
             transition: .3s ease;
-
+            @include mobile {
+                width: 100%;
+                justify-content: center;
+            }
             &.toAccount {
                 background: $black;
                 color: $white;

@@ -52,6 +52,13 @@ function arismed_checkout_prepare()
         'floor' => isset($_POST['floor']) ? sanitize_text_field(wp_unslash($_POST['floor'])) : '',
         'note' => isset($_POST['description']) ? sanitize_textarea_field(wp_unslash($_POST['description'])) : '',
         'payment' => $payment,
+        'billing' => [
+            'first_name' => isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '',
+            'last_name' => isset($_POST['surname']) ? sanitize_text_field(wp_unslash($_POST['surname'])) : '',
+            'email' => isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '',
+            'phone' => isset($_POST['phone']) ? wc_clean(wp_unslash($_POST['phone'])) : '',
+            'city'       => isset($_POST['city']) ? sanitize_text_field(wp_unslash($_POST['city'])) : '',
+        ],
     ];
 
     if ($payment === 'invoice') {
@@ -70,9 +77,9 @@ function arismed_checkout_prepare()
     $intent = wp_generate_uuid4();
 
     WC()->session->set("arismed_intent_$intent", [
-        'mode' => $payment,   
-        'checkout' => $data,  
-        'cart' => $cart_items,      
+        'mode' => $payment,
+        'checkout' => $data,
+        'cart' => $cart_items,
         'user_id' => is_user_logged_in() ? get_current_user_id() : null,
         'expires' => time() + 15 * MINUTE_IN_SECONDS,
     ]);
