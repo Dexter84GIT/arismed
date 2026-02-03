@@ -13,6 +13,16 @@ function arismed_checkout_prepare()
         wp_send_json_error(['message' => 'Cart is empty'], 400);
     }
 
+    $cart_items = [];
+
+    foreach ($cart->get_cart() as $item) {
+        $cart_items[] = [
+            'product_id' => (int) $item['product_id'],
+            'variation_id' => (int) ($item['variation_id'] ?? 0),
+            'quantity' => (int) $item['quantity'],
+        ];
+    }
+
     $payment = isset($_POST['payment'])
         ? sanitize_text_field(wp_unslash($_POST['payment']))
         : '';
@@ -60,11 +70,11 @@ function arismed_checkout_prepare()
     $intent = wp_generate_uuid4();
 
     WC()->session->set("arismed_intent_$intent", [
-        'mode' => $payment,
-        'checkout' => $data,
-        'data' => $data,
-        'expires' => time() + 15 * MINUTE_IN_SECONDS,
+        'mode' => $payment,              // online | invoice
+        'checkout' => $data,              // данные из чекаута
+        'cart' => $cart_items,            // ЗАФИКСИРОВАННАЯ корзина
         'user_id' => is_user_logged_in() ? get_current_user_id() : null,
+        'expires' => time() + 15 * MINUTE_IN_SECONDS,
     ]);
 
     $redirect = add_query_arg(
