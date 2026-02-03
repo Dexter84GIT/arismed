@@ -62,7 +62,7 @@
                                     <meta itemprop="priceCurrency" content="RUB">
                                     <button
                                       type="button"
-                                      class="btn ajaxAddToCart"
+                                      class="btn addToCart"
                                       data-product_id="<?php echo esc_attr($product->get_id()); ?>"
                                       data-qty="1"
                                     >В корзину</button>

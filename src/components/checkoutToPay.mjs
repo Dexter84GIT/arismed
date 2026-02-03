@@ -13,7 +13,35 @@ const checkoutToPay = () => {
     };
 
     const notVal = (msg) => {
-        console.log(msg);
+        showError(msg);
+    };
+
+    const errorNotice = form.querySelector('#errorNotice');
+    let errorTimer = null;
+
+    const showError = (msg) => {
+        if (!errorNotice) return;
+
+        errorNotice.textContent = msg;
+        errorNotice.classList.add('active');
+
+        if (errorTimer) clearTimeout(errorTimer);
+
+        errorTimer = setTimeout(() => {
+            hideError();
+        }, 5000);
+    };
+
+    const hideError = () => {
+        if (!errorNotice) return;
+
+        errorNotice.textContent = '';
+        errorNotice.classList.remove('active');
+
+        if (errorTimer) {
+            clearTimeout(errorTimer);
+            errorTimer = null;
+        }
     };
 
     postInput.addEventListener('input', () => {
@@ -26,6 +54,8 @@ const checkoutToPay = () => {
             setError(postInput, false);
         }
     });
+
+    form.addEventListener('change', hideError);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -74,10 +104,15 @@ const checkoutToPay = () => {
                 body: fd,
             });
 
+            if (!res.ok) {
+                notVal('Ошибка сервера');
+                return;
+            }
+
             const data = await res.json();
 
             if (!data.success && data.data?.code === 'login_required') {
-                console.log('Для выставления счёта нужно авторизоваться');
+                showError('Для выставления счёта нужно авторизоваться');
                 return;
             }
 

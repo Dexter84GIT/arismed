@@ -75,13 +75,13 @@ const checkoutAddresses = () => {
       const addresses = json.data.addresses;
       if (!addresses.length) return;
 
-      select.innerHTML = '<option value="">— Не выбирать —</option>';
+      select.innerHTML = '<option value="">Выбрать из списка</option>';
 
       addresses.forEach((a, i) => {
         const opt = document.createElement('option');
         opt.value = String(i);
         opt.textContent =
-          (a.type === 'shipping' ? 'Доставка' : 'Платёжный') +
+          (a.type === 'shipping' ? 'Доставка' : 'Сохраненный адрес') +
           ': ' +
           formatLabel(a);
         select.appendChild(opt);

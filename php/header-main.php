@@ -7,6 +7,7 @@
     <meta name="yandex-verification" content="fb70cec6ae67d084" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <title><?php the_title(); ?></title>
+    <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
     <?php wp_head(); ?>
 </head>
 

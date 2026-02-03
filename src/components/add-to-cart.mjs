@@ -29,11 +29,18 @@ const replaceFragments = (fragments) => {
   });
 };
 
-const getQty = (form) => {
+const getQty = (form, btn) => {
+  const fromData = btn?.getAttribute?.("data-qty");
+  if (fromData) {
+    const v = parseInt(fromData, 10);
+    if (Number.isFinite(v) && v > 0) return v;
+  }
+
   const el =
-    form.querySelector('input[name="quantity"]') ||
-    form.querySelector(".qtyInput") ||
-    form.querySelector('input.qty');
+    form.querySelector?.('input[name="quantity"]') ||
+    form.querySelector?.(".qtyInput") ||
+    form.querySelector?.('input.qty');
+
   const v = el ? parseInt(el.value || "1", 10) : 1;
   return Number.isFinite(v) && v > 0 ? v : 1;
 };
@@ -63,7 +70,7 @@ const onClick = async (e) => {
   const btn = e.target?.closest?.(".addToCart");
   if (!btn) return;
 
-  const form = btn.closest("form.cart") || btn.closest("form");
+  const form = btn.closest("form.cart") || btn.closest("form") || btn.closest(".slide") || btn;
   if (!form) return;
 
   e.preventDefault();
@@ -72,7 +79,7 @@ const onClick = async (e) => {
   const product_id = getProductId(form, btn);
   if (!product_id) return;
 
-  const quantity = getQty(form);
+  const quantity = getQty(form, btn);
 
   btn.disabled = true;
   btn.classList.add("loading");

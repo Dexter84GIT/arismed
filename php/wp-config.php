@@ -98,7 +98,8 @@ define('DONOTMINIFY', true);
 define('DONOTCDN', true);
 /* Add any custom values between this line and the "stop editing" line. */
 
-
+define(constant_name: 'YOOKASSA_SHOP_ID', '1230466');
+define('YOOKASSA_SECRET_KEY', 'live_eNL4JgXb0D6-mzcyporcG2_Y8au0hiqEss2xXfdpgQk');
 
 /* That's all, stop editing! Happy publishing. */
 

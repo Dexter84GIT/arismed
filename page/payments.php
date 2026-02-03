@@ -1,27 +1,27 @@
 <?php
-/* 
-    Template Name: Страница оплаты
+/*
+Template Name: Страница оплаты
 */
 defined('ABSPATH') || exit;
 
-$intent = sanitize_text_field($_GET['intent'] ?? '');
+get_header();
 
-$data = WC()->session->get("arismed_intent_$intent");
+$intent = isset($_GET['intent']) ? sanitize_text_field($_GET['intent']) : '';
+$data = $intent ? WC()->session->get("arismed_intent_$intent") : null;
 
-get_header(); ?>
+$is_valid =
+    $intent &&
+    is_array($data) &&
+    ($data['mode'] ?? null) === 'online' &&
+    ($data['expires'] ?? 0) >= time();
+?>
 
-<section class="payment section">
+<section class="payment section" id="yookassa-payment">
     <div class="container df fdc gap20">
-        <?php if (
-            !$intent ||
-            !$data ||
-            $data['mode'] !== 'online' ||
-            $data['expires'] < time() ||
-            $data['cart_hash'] !== WC()->cart->get_cart_hash()
-        ): ?>
+        <?php if (!$is_valid): ?>
             <h2 class="pageTitle">Сессия истекла</h2>
         <?php else: ?>
-            <?php include get_template_directory() . '/inc/page-checkout/payment.php'; ?>
+            <?php require get_template_directory() . '/inc/page-checkout/payment.php'; ?>
         <?php endif; ?>
     </div>
 </section>

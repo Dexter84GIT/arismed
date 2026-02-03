@@ -1,7 +1,7 @@
 <?php
 $show_saved_addresses = false;
-
-if (is_user_logged_in()) {
+$is_logged_in = is_user_logged_in();
+if ($is_logged_in) {
     $uid = get_current_user_id();
     $addresses = get_user_meta($uid, 'arismed_saved_addresses', true);
     $show_saved_addresses = is_array($addresses) && !empty($addresses);
@@ -103,23 +103,32 @@ if (is_user_logged_in()) {
                     <div class="row df aifs gap30">
                         <label for="online" class="df aifs gap30">
                             <div class="fieldRadio">
-                                <input type="radio" name="payment" id="online" value="online">
+                                <input type="radio" name="payment" id="online" value="online" checked>
                             </div>
                             <div class="field df fdc gap15">
                                 <h3 class="druk">Оплата онлайн</h3>
-                                <span>Оплата через СБП</span>
+                                <span>Оплата через ЮКасса</span>
                             </div>
                         </label>
                     </div>
 
-                    <div class="row df aifs gap30">
+                    <div class="row df aifs gap30 <?php echo !$is_logged_in ? 'disabled' : ''; ?>">
                         <label for="invoice" class="df aifs gap30">
                             <div class="fieldRadio">
-                                <input type="radio" name="payment" id="invoice" value="invoice">
+                                <input type="radio" name="payment" id="invoice" value="invoice" <?php echo !$is_logged_in ? 'disabled' : ''; ?>>
                             </div>
+
                             <div class="field df fdc gap15">
-                                <h3 class="druk">Сформировать счет</h3>
-                                <span>Счет для безналичной оплаты</span>
+                                <h3 class="druk">Сформировать счёт</h3>
+
+                                <?php if ($is_logged_in): ?>
+                                    <span>Счёт для безналичной оплаты</span>
+                                <?php else: ?>
+                                    <span class="muted">
+                                        Запрос счёта доступен только зарегистрированным пользователям.
+                                        <a href="/login">Войти</a>
+                                    </span>
+                                <?php endif; ?>
                             </div>
                         </label>
                     </div>
@@ -151,12 +160,17 @@ if (is_user_logged_in()) {
                 wp_create_nonce('arismed_checkout_prepare')
             ); ?>">
 
-            <button type="submit" class="druk submit df aic gap10">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M6 0L4.9425 1.0575L9.1275 5.25H0V6.75H9.1275L4.9425 10.9425L6 12L12 6L6 0Z" />
-                </svg>
-                <p>Продолжить</p>
-            </button>
+
+
+            <div class="block df aic gap60 jcfe submitRow">
+                <p class="notice" id="errorNotice"></p>
+                <button type="submit" class="druk submit df aic gap10">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 0L4.9425 1.0575L9.1275 5.25H0V6.75H9.1275L4.9425 10.9425L6 12L12 6L6 0Z" />
+                    </svg>
+                    <p>Продолжить</p>
+                </button>
+            </div>
 
         </form>
     </div>

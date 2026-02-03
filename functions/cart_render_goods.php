@@ -1,4 +1,4 @@
-
+<?php
 function arismed_render_cart_page_items() {
     $cart = WC()->cart;
     if (!$cart) return;

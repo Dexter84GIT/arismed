@@ -7,101 +7,105 @@
  * @package arismed
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '1.0.0' );
+if (!defined('_S_VERSION')) {
+    define('_S_VERSION', '1.0.0');
 }
 
-if ( ! function_exists( 'arismed_setup' ) ) :
-	function arismed_setup() {
-		load_theme_textdomain( 'arismed', get_template_directory() . '/languages' );
+if (!function_exists('arismed_setup')):
+    function arismed_setup()
+    {
+        load_theme_textdomain('arismed', get_template_directory() . '/languages');
 
-		add_theme_support( 'automatic-feed-links' );
-		add_theme_support( 'title-tag' );
-		add_theme_support( 'post-thumbnails' );
+        add_theme_support('automatic-feed-links');
+        add_theme_support('title-tag');
+        add_theme_support('post-thumbnails');
 
-		register_nav_menus(
-			array(
-				'menu-1' => esc_html__( 'Primary', 'arismed' ),
-			)
-		);
+        register_nav_menus(
+            array(
+                'menu-1' => esc_html__('Primary', 'arismed'),
+            )
+        );
 
-		add_theme_support(
-			'html5',
-			array(
-				'search-form',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-				'style',
-				'script',
-			)
-		);
+        add_theme_support(
+            'html5',
+            array(
+                'search-form',
+                'comment-form',
+                'comment-list',
+                'gallery',
+                'caption',
+                'style',
+                'script',
+            )
+        );
 
-		add_theme_support(
-			'custom-background',
-			apply_filters(
-				'arismed_custom_background_args',
-				array(
-					'default-color' => 'ffffff',
-					'default-image' => '',
-				)
-			)
-		);
+        add_theme_support(
+            'custom-background',
+            apply_filters(
+                'arismed_custom_background_args',
+                array(
+                    'default-color' => 'ffffff',
+                    'default-image' => '',
+                )
+            )
+        );
 
-		add_theme_support( 'customize-selective-refresh-widgets' );
+        add_theme_support('customize-selective-refresh-widgets');
 
-		add_theme_support(
-			'custom-logo',
-			array(
-				'height'      => 250,
-				'width'       => 250,
-				'flex-width'  => true,
-				'flex-height' => true,
-			)
-		);
-	}
+        add_theme_support(
+            'custom-logo',
+            array(
+                'height' => 250,
+                'width' => 250,
+                'flex-width' => true,
+                'flex-height' => true,
+            )
+        );
+    }
 endif;
-add_action( 'after_setup_theme', 'arismed_setup' );
+add_action('after_setup_theme', 'arismed_setup');
 
-function arismed_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'arismed_content_width', 640 );
+function arismed_content_width()
+{
+    $GLOBALS['content_width'] = apply_filters('arismed_content_width', 640);
 }
-add_action( 'after_setup_theme', 'arismed_content_width', 0 );
+add_action('after_setup_theme', 'arismed_content_width', 0);
 
-function arismed_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Sidebar', 'arismed' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'arismed' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
+function arismed_widgets_init()
+{
+    register_sidebar(
+        array(
+            'name' => esc_html__('Sidebar', 'arismed'),
+            'id' => 'sidebar-1',
+            'description' => esc_html__('Add widgets here.', 'arismed'),
+            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+            'after_widget' => '</section>',
+            'before_title' => '<h2 class="widget-title">',
+            'after_title' => '</h2>',
+        )
+    );
 }
-add_action( 'widgets_init', 'arismed_widgets_init' );
+add_action('widgets_init', 'arismed_widgets_init');
 
-function arismed_scripts() {
-	wp_enqueue_style( 'arismed-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'arismed-style', 'rtl', 'replace' );
+function arismed_scripts()
+{
+    wp_enqueue_style('arismed-style', get_stylesheet_uri(), array(), _S_VERSION);
+    wp_style_add_data('arismed-style', 'rtl', 'replace');
 
-	wp_enqueue_script( 'arismed-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+    wp_enqueue_script('arismed-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
+    }
 }
-add_action( 'wp_enqueue_scripts', 'arismed_scripts' );
+add_action('wp_enqueue_scripts', 'arismed_scripts');
 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+if (defined('JETPACK__VERSION')) {
+    require get_template_directory() . '/inc/jetpack.php';
 }
 
 add_action('wp_enqueue_scripts', function () {
@@ -161,25 +165,30 @@ add_action('wc_ajax_nopriv_arismed_cart_remove', 'arismed_cart_remove');
 add_action('wc_ajax_arismed_cart_update_qty', 'arismed_cart_update_qty');
 add_action('wc_ajax_nopriv_arismed_cart_update_qty', 'arismed_cart_update_qty');
 
-function arismed_cart_ensure_loaded() {
-    if (!function_exists('WC')) return false;
+function arismed_cart_ensure_loaded()
+{
+    if (!function_exists('WC'))
+        return false;
 
     if (function_exists('wc_load_cart') && (null === WC()->cart || !WC()->cart)) {
         wc_load_cart();
     }
 
-    if (!WC()->cart) return false;
+    if (!WC()->cart)
+        return false;
 
     WC()->cart->calculate_totals();
     return true;
 }
 
-function arismed_cart_nonce_ok($nonce) {
+function arismed_cart_nonce_ok($nonce)
+{
     $nonce = is_string($nonce) ? $nonce : '';
     return $nonce && wp_verify_nonce($nonce, 'arismed_cart');
 }
 
-function arismed_mini_cart() {
+function arismed_mini_cart()
+{
     if (!arismed_cart_ensure_loaded()) {
         wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
@@ -195,7 +204,8 @@ function arismed_mini_cart() {
     ]);
 }
 
-function arismed_cart_payload() {
+function arismed_cart_payload()
+{
     ob_start();
     arismed_render_mini_cart_items();
     $items = ob_get_clean();
@@ -228,9 +238,11 @@ function arismed_cart_payload() {
     ];
 }
 
-function arismed_render_cart_page_items() {
+function arismed_render_cart_page_items()
+{
     $cart = WC()->cart;
-    if (!$cart) return;
+    if (!$cart)
+        return;
 
     $items = $cart->get_cart();
     $currency = get_woocommerce_currency_symbol();
@@ -255,10 +267,12 @@ function arismed_render_cart_page_items() {
 
     foreach ($items as $cart_item_key => $cart_item) {
         $product = $cart_item['data'] ?? null;
-        if (!$product || !$product->exists()) continue;
+        if (!$product || !$product->exists())
+            continue;
 
         $qty = (int) ($cart_item['quantity'] ?? 0);
-        if ($qty <= 0) continue;
+        if ($qty <= 0)
+            continue;
 
         $name = $product->get_name();
 
@@ -273,34 +287,37 @@ function arismed_render_cart_page_items() {
 
         if ($product->is_on_sale()) {
             $regular = (float) wc_get_price_to_display($product, ['qty' => 1, 'price' => $product->get_regular_price()]);
-            if ($regular > 0 && $regular > $price_now) $price_old = $regular;
+            if ($regular > 0 && $regular > $price_now)
+                $price_old = $regular;
         }
         ?>
         <div class="row unit df aic gap60" data-key="<?php echo esc_attr($cart_item_key); ?>">
             <div class="block df aic gap30">
                 <div class="img">
-                    <?php if ($img) : ?>
-                        <?php if ($link) : ?>
+                    <?php if ($img): ?>
+                        <?php if ($link): ?>
                             <a href="<?php echo esc_url($link); ?>">
                                 <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
                             </a>
-                        <?php else : ?>
+                        <?php else: ?>
                             <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?php if ($link) : ?>
+                <?php if ($link): ?>
                     <a class="name druk" href="<?php echo esc_url($link); ?>"><?php echo esc_html($name); ?></a>
-                <?php else : ?>
+                <?php else: ?>
                     <p class="name druk"><?php echo esc_html($name); ?></p>
                 <?php endif; ?>
             </div>
 
             <div class="block df aic gap30">
-                <?php if ($price_old > 0) : ?>
-                    <p class="old"><?php echo esc_html($fmt_price($price_old)); ?><span class="currency"><?php echo esc_html($currency); ?></span></p>
+                <?php if ($price_old > 0): ?>
+                    <p class="old"><?php echo esc_html($fmt_price($price_old)); ?><span
+                            class="currency"><?php echo esc_html($currency); ?></span></p>
                 <?php endif; ?>
-                <p class="new druk"><?php echo esc_html($fmt_price($price_now)); ?><span class="currency"><?php echo esc_html($currency); ?></span></p>
+                <p class="new druk"><?php echo esc_html($fmt_price($price_now)); ?><span
+                        class="currency"><?php echo esc_html($currency); ?></span></p>
             </div>
 
             <div class="quantity df aic gap20">
@@ -312,14 +329,16 @@ function arismed_render_cart_page_items() {
                 <p class="count" data-count><?php echo (int) $qty; ?></p>
                 <div class="inc btn" data-action="inc" role="button" tabindex="0" aria-label="Увеличить">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.2498 9.74976H9.74976V14.2498H8.24976V9.74976H3.74976V8.24976H8.24976V3.74976H9.74976V8.24976H14.2498V9.74976Z" />
+                        <path
+                            d="M14.2498 9.74976H9.74976V14.2498H8.24976V9.74976H3.74976V8.24976H8.24976V3.74976H9.74976V8.24976H14.2498V9.74976Z" />
                     </svg>
                 </div>
             </div>
 
             <p class="cancel df aic jcc" data-action="remove" role="button" tabindex="0" aria-label="Удалить">
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
+                    <path
+                        d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
                 </svg>
             </p>
         </div>
@@ -327,15 +346,18 @@ function arismed_render_cart_page_items() {
     }
 }
 
-function arismed_render_cart_page_total() {
-    if (!WC()->cart) return;
+function arismed_render_cart_page_total()
+{
+    if (!WC()->cart)
+        return;
     $total = (float) WC()->cart->get_total('edit');
     $currency = get_woocommerce_currency_symbol();
     echo esc_html(number_format_i18n($total, 0)) . '<span class="currency">' . esc_html($currency) . '</span>';
 }
 
 
-function arismed_cart_sync() {
+function arismed_cart_sync()
+{
     if (!arismed_cart_ensure_loaded()) {
         wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
@@ -343,7 +365,8 @@ function arismed_cart_sync() {
     wp_send_json(arismed_cart_payload());
 }
 
-function arismed_cart_remove() {
+function arismed_cart_remove()
+{
     if (!arismed_cart_ensure_loaded()) {
         wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
@@ -364,7 +387,8 @@ function arismed_cart_remove() {
     wp_send_json(arismed_cart_payload());
 }
 
-function arismed_cart_update_qty() {
+function arismed_cart_update_qty()
+{
     if (!arismed_cart_ensure_loaded()) {
         wp_send_json_error(['message' => 'Cart unavailable'], 400);
     }
@@ -388,14 +412,17 @@ function arismed_cart_update_qty() {
     wp_send_json(arismed_cart_payload());
 }
 
-function arismed_render_mini_cart_count() {
+function arismed_render_mini_cart_count()
+{
     $count = WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0;
     echo (int) $count;
 }
 
-function arismed_render_mini_cart_items() {
+function arismed_render_mini_cart_items()
+{
     $cart = WC()->cart;
-    if (!$cart) return;
+    if (!$cart)
+        return;
 
     $currency = get_woocommerce_currency_symbol();
     $nonce = wp_create_nonce('arismed_cart');
@@ -407,10 +434,12 @@ function arismed_render_mini_cart_items() {
 
     foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
         $product = $cart_item['data'] ?? null;
-        if (!$product || !$product->exists()) continue;
+        if (!$product || !$product->exists())
+            continue;
 
         $qty = (int) ($cart_item['quantity'] ?? 0);
-        if ($qty <= 0) continue;
+        if ($qty <= 0)
+            continue;
 
         $name = $product->get_name();
         $img_id = (int) $product->get_image_id();
@@ -423,7 +452,7 @@ function arismed_render_mini_cart_items() {
         ?>
         <div class="item df aic gap20" data-key="<?php echo esc_attr($cart_item_key); ?>">
             <div class="img">
-                <?php if ($img) : ?>
+                <?php if ($img): ?>
                     <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
                 <?php endif; ?>
             </div>
@@ -433,13 +462,15 @@ function arismed_render_mini_cart_items() {
                 <p class="cost druk">
                     <span class="number"><?php echo esc_html((string) $qty); ?></span>
                     <span>x</span>
-                    <span class="sum"><?php echo esc_html($unit_str); ?><span class="currency"><?php echo esc_html($currency); ?></span></span>
+                    <span class="sum"><?php echo esc_html($unit_str); ?><span
+                            class="currency"><?php echo esc_html($currency); ?></span></span>
                 </p>
             </div>
 
             <button class="delete" type="button" aria-label="Удалить" data-nonce="<?php echo esc_attr($nonce); ?>">
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
+                    <path
+                        d="M10.5 1.0575L9.4425 0L5.25 4.1925L1.0575 0L0 1.0575L4.1925 5.25L0 9.4425L1.0575 10.5L5.25 6.3075L9.4425 10.5L10.5 9.4425L6.3075 5.25L10.5 1.0575Z" />
                 </svg>
             </button>
         </div>
@@ -447,8 +478,10 @@ function arismed_render_mini_cart_items() {
     }
 }
 
-function arismed_render_mini_cart_total() {
-    if (!WC()->cart) return;
+function arismed_render_mini_cart_total()
+{
+    if (!WC()->cart)
+        return;
 
     $total = (float) WC()->cart->get_total('edit');
     $currency = get_woocommerce_currency_symbol();
@@ -532,10 +565,10 @@ if (file_exists($docsSearch)) {
 
 // реальный платеж
 
- $realPay = get_template_directory() . '/functions/checkout_submit.php';
- if (file_exists($realPay)) {
-     require_once $realPay;
- }
+$realPay = get_template_directory() . '/functions/checkout_submit.php';
+if (file_exists($realPay)) {
+    require_once $realPay;
+}
 
 // проверка полей пользователя на чекауте
 
@@ -565,16 +598,26 @@ if (file_exists($accountDeleteAdress)) {
     require_once $accountDeleteAdress;
 }
 
+// дневной лимит запросов счета 
+
+require_once get_template_directory() . '/functions/invoice_limit.php';
+
+// вебхук юкассы 
+
+require_once get_template_directory() . '/functions/yookassa_webhook.php';
+
 // принудительно переключаем шаблон категорий
 
 add_filter('template_include', function ($template) {
     if (function_exists('is_product_category') && is_product_category()) {
         $t = get_template_directory() . '/taxonomy-product_cat.php';
-        if (is_readable($t)) return $t;
+        if (is_readable($t))
+            return $t;
     }
     if (function_exists('is_shop') && is_shop()) {
         $t = get_template_directory() . '/archive-product.php';
-        if (is_readable($t)) return $t;
+        if (is_readable($t))
+            return $t;
     }
     return $template;
 }, 99999);
