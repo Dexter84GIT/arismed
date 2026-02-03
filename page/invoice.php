@@ -61,7 +61,7 @@ $checkout = $session['checkout'] ?? [];
 $cart_snapshot = $session['cart'] ?? [];
 ?>
 
-<section class="invoice section">
+<section class="invoice section" id="invoice-prepare">
     <div class="container df fdc gap20">
         <?php
         include get_template_directory() . '/inc/page-checkout/invoice.php';

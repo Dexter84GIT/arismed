@@ -606,6 +606,13 @@ require_once get_template_directory() . '/functions/invoice_limit.php';
 
 require_once get_template_directory() . '/functions/yookassa_webhook.php';
 
+// формирование счета
+
+$checkoutInvoice = get_template_directory() . '/functions/checkout_invoice.php';
+if (file_exists($checkoutInvoice)) {
+    require_once $checkoutInvoice;
+}
+
 // принудительно переключаем шаблон категорий
 
 add_filter('template_include', function ($template) {

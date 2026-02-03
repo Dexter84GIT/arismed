@@ -12,6 +12,7 @@ import initDocsSearch from "./components/docsSearch.mjs";
 import checkoutAddresses from "./components/checkoutSelectAdress.mjs";
 import checkoutToPay from "./components/checkoutToPay.mjs";
 import checkoutPaymentForm from "./components/checkoutPaymentForm.mjs";
+import invoiceSubmit from "./components/checkoutInvoiceSubmit.mjs";
 // аккаунт
 import accountSortOrders from "./components/accountSortOrders.mjs";
 import addAdressForm from "./components/accountAddAdress.mjs";
@@ -21,6 +22,7 @@ import goodsAddToCart from "./components/goodsAddToCart.mjs";
 import { initMiniCartSync } from "./components/miniCartSync.mjs";
 
 const paymentContainer = document.getElementById('yookassa-payment');
+const invoiceContainer = document.getElementById('invoice-prepare');
 
 document.addEventListener('DOMContentLoaded', () => {
     cookiePolicy();
@@ -37,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutToPay();
     if (paymentContainer) {
         checkoutPaymentForm(paymentContainer);
+    }
+    if (invoiceContainer) {
+        invoiceSubmit(invoiceContainer);
     }
 
     // аккаунт
